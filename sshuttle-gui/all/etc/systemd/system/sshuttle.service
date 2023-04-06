@@ -1,11 +1,12 @@
 [Unit]
 Description=sshuttle
 Wants=network-online.target
-After=network.target
+After=network-online.target
 
 [Service]
 Type=simple
 ExecStart=/etc/sshuttle-gui/connect.sh
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
