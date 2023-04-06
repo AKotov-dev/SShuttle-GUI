@@ -11,7 +11,7 @@ release=0.mrx9
 group=Applications/System
 
 [DESCRIPTION]
-0=Simple SShuttle SSH connector GUI
+0=GUI for SShuttle - Transparent proxy server that works as a poor man's VPN. Forwards over ssh.
 1=---
 2=More information: /usr/share/doc/package_name/repack.txt
 
@@ -22,16 +22,16 @@ maintainer=Alex Kotov
 vendor=alex_q_2000 (C) 2022
 
 [SUMMARY]
-summary=Simple SShuttle SSH connector GUI
+summary=GUI for SShuttle
 
 [URLCOPY]
-urlcopy=https://github.com/AKotov-dev/???
+urlcopy=https://github.com/AKotov-dev/SShuttle-GUI
 
 [LICENSE]
 license=GPLv3
 
 [DEPS]
-deps=gtk2 polkit fping systemd sshuttle sshpass
+deps=sshuttle sshpass iptables gtk2 polkit fping systemd
 
 [META]
 meta=0
@@ -44,11 +44,12 @@ deb=0
 
 [FILES]
 0=/usr/share/sshuttle-gui/
-1=/usr/bin/sshuttle-gui
-2=/usr/share/icons/sshuttle-gui.png
-3=/etc/systemd/system/sshuttle.service
-4=/usr/share/applications/sshuttle-gui.desktop
-5=/usr/share/polkit-1/actions/sshuttle-gui.policy
+1=/usr/share/doc/sshuttle-gui/
+2=/usr/bin/sshuttle-gui
+3=/usr/share/icons/sshuttle-gui.png
+4=/etc/systemd/system/sshuttle.service
+5=/usr/share/applications/sshuttle-gui.desktop
+6=/usr/share/polkit-1/actions/sshuttle-gui.policy
 
 [AFTERINSTALL]
 0=systemctl daemon-reload
@@ -57,7 +58,7 @@ deb=0
 0=systemctl daemon-reload
 
 [URL32]
-url32=https://github.com/AKotov-dev/???
+url32=https://github.com/AKotov-dev/SShuttle-GUI
 
 [PROGRAMNAME]
 programname=SShuttle-GUI
