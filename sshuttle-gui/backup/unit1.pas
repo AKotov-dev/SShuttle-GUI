@@ -143,7 +143,7 @@ end;
 
 procedure TMainForm.FormShow(Sender: TObject);
 begin
-  IniPropStorage1.Restore;
+  //IniPropStorage1.Restore;
 
   //Высота/Ширина формы (Auto)
   MainForm.Height := ClearBox.Top + ClearBox.Height + StaticText1.Height + 5;

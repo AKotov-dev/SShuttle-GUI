@@ -2,7 +2,7 @@
 name=sshuttle-gui
 
 [VERSION]
-version=0.1
+version=0.2
 
 [RELEASE]
 release=0.mrx9
@@ -70,4 +70,8 @@ devtool=Lazarus
 toolversion=2.2.4
 
 [INFO]
-0=v0.1 - initial release
+0=v0.2
+1=+ Improved startup sshuttle.service
+2=+ RPM-packages for Mageia-8, ROSA Linux and Mageia-9
+3=
+4=v0.1 - initial release
