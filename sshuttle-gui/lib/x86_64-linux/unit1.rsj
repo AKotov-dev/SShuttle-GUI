@@ -1,0 +1,4 @@
+{"version":1,"strings":[
+{"hash":5941396,"name":"unit1.sstart","sourcebytes":[83,116,97,114,116],"value":"Start"},
+{"hash":371552,"name":"unit1.sstop","sourcebytes":[83,116,111,112],"value":"Stop"}
+]}

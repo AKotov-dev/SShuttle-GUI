@@ -1,0 +1,65 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: tmainform.autostartbox.caption
+msgid "Autostart VPN on reboot"
+msgstr ""
+
+#: tmainform.caption
+msgid "SShuttle-GUI"
+msgstr ""
+
+#: tmainform.clearbox.caption
+msgid "Clear browser cookies on start GUI"
+msgstr ""
+
+#: tmainform.ipv6box.caption
+msgid "--disable-ipv6"
+msgstr ""
+
+#: tmainform.label1.caption
+msgid "Login:"
+msgstr ""
+
+#: tmainform.label2.caption
+msgid "Password:"
+msgstr ""
+
+#: tmainform.label3.caption
+msgid "Server:"
+msgstr ""
+
+#: tmainform.label4.caption
+msgid "Port:"
+msgstr ""
+
+#: tmainform.latencybox.caption
+msgid "--no-latency-control"
+msgstr ""
+
+#: tmainform.portedit.text
+msgid "22"
+msgstr ""
+
+#: tmainform.startbtn.caption
+msgctxt "tmainform.startbtn.caption"
+msgid "Start"
+msgstr ""
+
+#: tmainform.statictext1.caption
+msgid "License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru"
+msgstr ""
+
+#: tmainform.useredit.text
+msgid "root"
+msgstr ""
+
+#: unit1.sstart
+msgctxt "unit1.sstart"
+msgid "Start"
+msgstr ""
+
+#: unit1.sstop
+msgid "Stop"
+msgstr ""
+

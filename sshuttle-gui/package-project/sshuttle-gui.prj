@@ -1,0 +1,72 @@
+[NAME]
+name=sshuttle-gui
+
+[VERSION]
+version=0.1
+
+[RELEASE]
+release=0.mrx9
+
+[GROUP]
+group=Applications/System
+
+[DESCRIPTION]
+0=Simple SShuttle SSH connector GUI
+1=---
+2=More information: /usr/share/doc/package_name/repack.txt
+
+[MAINTAINER]
+maintainer=Alex Kotov
+
+[VENDOR]
+vendor=alex_q_2000 (C) 2022
+
+[SUMMARY]
+summary=Simple SShuttle SSH connector GUI
+
+[URLCOPY]
+urlcopy=https://github.com/AKotov-dev/???
+
+[LICENSE]
+license=GPLv3
+
+[DEPS]
+deps=gtk2 polkit fping systemd sshuttle sshpass
+
+[META]
+meta=0
+
+[NOARCH]
+noarch=0
+
+[DEB]
+deb=0
+
+[FILES]
+0=/usr/share/sshuttle-gui/
+1=/usr/bin/sshuttle-gui
+2=/usr/share/icons/sshuttle-gui.png
+3=/etc/systemd/system/sshuttle.service
+4=/usr/share/applications/sshuttle-gui.desktop
+5=/usr/share/polkit-1/actions/sshuttle-gui.policy
+
+[AFTERINSTALL]
+0=systemctl daemon-reload
+
+[AFTERREMOVE]
+0=systemctl daemon-reload
+
+[URL32]
+url32=https://github.com/AKotov-dev/???
+
+[PROGRAMNAME]
+programname=SShuttle-GUI
+
+[DEVTOOL]
+devtool=Lazarus
+
+[TOOLVERSION]
+toolversion=2.2.4
+
+[INFO]
+0=v0.1 - initial release

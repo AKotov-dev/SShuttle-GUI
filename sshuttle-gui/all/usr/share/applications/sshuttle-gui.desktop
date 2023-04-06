@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=SShuttle-GUI
+Comment=SSH VPN connector
+Comment[ru]=SSH VPN коннектор
+Icon=sshuttle-gui
+Exec=sshuttle-gui
+Type=Application
+Categories=System;
+Terminal=false

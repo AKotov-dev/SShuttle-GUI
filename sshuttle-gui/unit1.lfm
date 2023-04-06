@@ -1,0 +1,221 @@
+object MainForm: TMainForm
+  Left = 263
+  Height = 175
+  Top = 126
+  Width = 531
+  Caption = 'SShuttle-GUI'
+  ClientHeight = 175
+  ClientWidth = 531
+  OnCreate = FormCreate
+  OnShow = FormShow
+  SessionProperties = 'IPv6Box.Checked;LatencyBox.Checked;Left;PasswordEdit.Text;PortEdit.Text;RouterEdit.Text;ServerEdit.Text;Top;UserEdit.Text'
+  LCLVersion = '2.2.4.0'
+  object Label1: TLabel
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 17
+    Top = 16
+    Width = 37
+    Caption = 'Login:'
+    ParentColor = False
+  end
+  object UserEdit: TEdit
+    AnchorSideLeft.Control = ServerEdit
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = Label2
+    Left = 51
+    Height = 37
+    Top = 6
+    Width = 95
+    BorderSpacing.Right = 10
+    TabOrder = 0
+    Text = 'root'
+  end
+  object Label2: TLabel
+    AnchorSideLeft.Control = UserEdit
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = UserEdit
+    AnchorSideTop.Side = asrCenter
+    Left = 156
+    Height = 17
+    Top = 16
+    Width = 61
+    BorderSpacing.Left = 10
+    Caption = 'Password:'
+    ParentColor = False
+  end
+  object PasswordEdit: TEdit
+    AnchorSideLeft.Control = Label2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrCenter
+    Left = 220
+    Height = 37
+    Top = 6
+    Width = 187
+    BorderSpacing.Left = 3
+    TabOrder = 1
+  end
+  object Label3: TLabel
+    AnchorSideTop.Control = ServerEdit
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 17
+    Top = 58
+    Width = 40
+    Caption = 'Server:'
+    ParentColor = False
+  end
+  object ServerEdit: TEdit
+    AnchorSideLeft.Control = Label3
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = UserEdit
+    AnchorSideTop.Side = asrBottom
+    Left = 51
+    Height = 37
+    Top = 48
+    Width = 221
+    BorderSpacing.Left = 3
+    BorderSpacing.Top = 5
+    BorderSpacing.Right = 10
+    TabOrder = 2
+  end
+  object ClearBox: TCheckBox
+    AnchorSideTop.Control = LatencyBox
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 283
+    Height = 32
+    Top = 134
+    Width = 242
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 6
+    Caption = 'Clear browser cookies on start GUI'
+    OnChange = ClearBoxChange
+    TabOrder = 7
+  end
+  object AutoStartBox: TCheckBox
+    AnchorSideLeft.Control = StartBtn
+    AnchorSideTop.Control = IPv6Box
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 343
+    Height = 32
+    Top = 100
+    Width = 182
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 6
+    Caption = 'Autostart VPN on reboot'
+    OnChange = AutoStartBoxChange
+    TabOrder = 5
+  end
+  object StartBtn: TSpeedButton
+    AnchorSideLeft.Control = Shape1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = PasswordEdit
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = PortEdit
+    AnchorSideBottom.Side = asrBottom
+    Left = 433
+    Height = 79
+    Top = 6
+    Width = 92
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Right = 6
+    Caption = 'Start'
+    Font.Height = -15
+    Font.Name = 'Sans'
+    Font.Style = [fsBold]
+    OnClick = StartBtnClick
+    ParentFont = False
+  end
+  object StaticText1: TStaticText
+    Left = 0
+    Height = 20
+    Top = 155
+    Width = 531
+    Align = alBottom
+    BorderStyle = sbsSingle
+    Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru'
+    Font.Color = clGray
+    Font.Height = -11
+    Font.Name = 'Sans'
+    ParentFont = False
+    TabOrder = 8
+  end
+  object Shape1: TShape
+    AnchorSideLeft.Control = PasswordEdit
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = StartBtn
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = StartBtn
+    Left = 416
+    Height = 12
+    Top = 39
+    Width = 12
+    BorderSpacing.Left = 9
+    BorderSpacing.Right = 5
+    Brush.Color = clYellow
+    Shape = stCircle
+  end
+  object Label4: TLabel
+    AnchorSideLeft.Control = ServerEdit
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ServerEdit
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = PortEdit
+    Left = 282
+    Height = 17
+    Top = 58
+    Width = 29
+    BorderSpacing.Right = 3
+    Caption = 'Port:'
+    ParentColor = False
+  end
+  object PortEdit: TEdit
+    AnchorSideLeft.Control = Label4
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ServerEdit
+    AnchorSideRight.Control = PasswordEdit
+    AnchorSideRight.Side = asrBottom
+    Left = 314
+    Height = 37
+    Top = 48
+    Width = 93
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 3
+    TabOrder = 3
+    Text = '22'
+  end
+  object IPv6Box: TCheckBox
+    AnchorSideTop.Control = ServerEdit
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 32
+    Top = 100
+    Width = 120
+    BorderSpacing.Top = 15
+    Caption = '--disable-ipv6'
+    TabOrder = 4
+  end
+  object LatencyBox: TCheckBox
+    AnchorSideTop.Control = IPv6Box
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 32
+    Top = 134
+    Width = 161
+    BorderSpacing.Top = 2
+    Caption = '--no-latency-control'
+    Checked = True
+    State = cbChecked
+    TabOrder = 6
+  end
+  object IniPropStorage1: TIniPropStorage
+    StoredValues = <>
+    Left = 216
+    Top = 96
+  end
+end

@@ -1,0 +1,10 @@
+[Unit]
+Description=sshuttle
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/etc/sshuttle-gui/connect.sh
+
+[Install]
+WantedBy=multi-user.target
