@@ -17,8 +17,8 @@ uses
 
 begin
   RequireDerivedFormResource := True;
-  Application.Title := 'SShuttle-GUI v0.1';
-  Application.Scaled := True;
+  Application.Title:='SShuttle-GUI v0.3';
+  Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);
   Application.Run;

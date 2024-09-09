@@ -61,7 +61,7 @@ begin
   end;
 end;
 
-//Индикация - светодиод
+//Индикация: Cветодиод, Режим
 procedure CheckPing.ShowStatus;
 begin
   with MainForm do

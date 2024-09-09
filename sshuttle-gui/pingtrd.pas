@@ -25,7 +25,7 @@ implementation
 
 uses unit1;
 
-{ TRD }
+  { TRD }
 
 procedure CheckPing.Execute;
 var
@@ -75,7 +75,7 @@ begin
     begin
       StartBtn.Caption := SStart;
       Shape1.Brush.Color := clYellow;
-      end;
+    end;
 
     Shape1.Repaint;
     StartBtn.Repaint;

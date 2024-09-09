@@ -2,13 +2,13 @@
 name=sshuttle-gui
 
 [VERSION]
-version=0.2
+version=0.3
 
 [RELEASE]
 release=0.mrx9
 
 [GROUP]
-group=Applications/System
+group=Networking/Other
 
 [DESCRIPTION]
 0=GUI for SShuttle - Transparent proxy server that works as a poor man's VPN. Forwards over ssh.
@@ -67,11 +67,16 @@ programname=SShuttle-GUI
 devtool=Lazarus
 
 [TOOLVERSION]
-toolversion=2.2.4
+toolversion=3.2
 
 [INFO]
-0=v0.2
-1=+ Improved startup sshuttle.service
-2=+ RPM-packages for Mageia-8, ROSA Linux and Mageia-9
-3=
-4=v0.1 - initial release
+0=v0.3
+1=+ Recompiling in Lazarus 3.2
+2=+ Re-creating SSH keys (changing server password, etc.)
+3=+ RPM-packages for Mageia-9 and Ubuntu
+4=
+5=v0.2
+6=+ Improved startup sshuttle.service
+7=+ RPM-packages for Mageia-8, ROSA Linux and Mageia-9
+8=
+9=v0.1 - initial release

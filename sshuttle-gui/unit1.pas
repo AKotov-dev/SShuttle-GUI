@@ -54,9 +54,9 @@ implementation
 
 uses pingtrd;
 
-{$R *.lfm}
+  {$R *.lfm}
 
-{ TMainForm }
+  { TMainForm }
 
 //Общая процедура запуска команд (асинхронная)
 procedure TMainForm.StartProcess(command: string);
@@ -178,37 +178,46 @@ begin
     StartProcess('systemctl stop sshuttle.service');
   end
   else
-    try
-      S := TStringList.Create;
+  try
+    S := TStringList.Create;
 
-      S.Add('#!/bin/bash');
-      S.Add('');
+    S.Add('#!/bin/bash');
+    S.Add('');
 
-      //Содаём пускач для systemd (Type=simple)
-      S.Add('# Проверка наличия валидных ключей /root/.ssh/{known_hosts,known_hosts.old}');
-      S.Add('if [[ ! -f /root/.ssh/known_hosts.old ]] || [[ -z $(ssh-keygen -F ' +
-        Trim(ServerEDit.Text) + ') ]]; then');
-      S.Add('sshpass -p "' + Trim(PasswordEdit.Text) +
-        '" ssh -o StrictHostKeyChecking=No ' + Trim(UserEdit.Text) +
-        '@' + Trim(ServerEDit.Text) + ' -p ' + Trim(PortEdit.Text) + ' exit 0; fi');
-      S.Add('');
-      S.Add('# Запуск vpn');
-      S.Add('[[ "$?" -eq "0" ]] && \');
-      S.Add('sshpass -p "' + Trim(PasswordEdit.Text) +
-        '" sshuttle --dns --remote ' + Trim(UserEdit.Text) + '@' +
-        Trim(ServerEDit.Text) + ':' + Trim(PortEdit.Text) + ' -x ' +
-        Trim(ServerEDit.Text) + ':' + Trim(PortEdit.Text) + ' 0/0 ' + Trim(Pars));
+    //Содаём пускач для systemd (Type=simple)
+    S.Add('# Пересоздание ключей в /root/.ssh/known_hosts (пароль мог изменяться)');
 
-      S.Add('exit 0;');
+    //Очистка прежних ключей (мог измениться пароль или хост)
+    S.Add('sed -i "/^' + Trim(ServerEDit.Text) + '/d" /root/.ssh/known_hosts');
 
-      S.SaveToFile('/etc/sshuttle-gui/connect.sh');
+   { S.Add('if [[ ! -f /root/.ssh/known_hosts.old ]] || [[ -z $(ssh-keygen -F ' +
+      Trim(ServerEDit.Text) + ') ]]; then'); }
 
-      //Запускаем скрипт через systemd
-      StartProcess('chmod +x /etc/sshuttle-gui/connect.sh; systemctl restart sshuttle.service');
+    //Пересоздать ключи для хоста (пароль мог измениться)
+    S.Add('sshpass -p "' + Trim(PasswordEdit.Text) +
+      '" ssh -o StrictHostKeyChecking=No ' + Trim(UserEdit.Text) +
+      // '@' + Trim(ServerEDit.Text) + ' -p ' + Trim(PortEdit.Text) + ' exit 0; fi');
+      '@' + Trim(ServerEDit.Text) + ' -p ' + Trim(PortEdit.Text) + ' exit 0');
 
-    finally
-      S.Free;
-    end;
+    S.Add('');
+
+    S.Add('# Запуск vpn');
+    S.Add('[[ "$?" -eq "0" ]] && \');
+    S.Add('sshpass -p "' + Trim(PasswordEdit.Text) + '" sshuttle --dns --remote ' +
+      Trim(UserEdit.Text) + '@' + Trim(ServerEDit.Text) + ':' +
+      Trim(PortEdit.Text) + ' -x ' + Trim(ServerEDit.Text) + ':' +
+      Trim(PortEdit.Text) + ' 0/0 ' + Trim(Pars));
+
+    S.Add('exit 0;');
+
+    S.SaveToFile('/etc/sshuttle-gui/connect.sh');
+
+    //Запускаем скрипт через systemd
+    StartProcess('chmod +x /etc/sshuttle-gui/connect.sh; systemctl restart sshuttle.service');
+
+  finally
+    S.Free;
+  end;
 end;
 
 

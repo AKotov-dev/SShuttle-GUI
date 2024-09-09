@@ -9,7 +9,7 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   OnShow = FormShow
   SessionProperties = 'IPv6Box.Checked;LatencyBox.Checked;Left;PasswordEdit.Text;PortEdit.Text;RouterEdit.Text;ServerEdit.Text;Top;UserEdit.Text'
-  LCLVersion = '2.2.4.0'
+  LCLVersion = '3.2.0.0'
   object Label1: TLabel
     AnchorSideTop.Side = asrCenter
     Left = 8
@@ -92,8 +92,8 @@ object MainForm: TMainForm
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 6
     Caption = 'Clear browser cookies on start GUI'
-    OnChange = ClearBoxChange
     TabOrder = 7
+    OnChange = ClearBoxChange
   end
   object AutoStartBox: TCheckBox
     AnchorSideLeft.Control = StartBtn
@@ -107,8 +107,8 @@ object MainForm: TMainForm
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 6
     Caption = 'Autostart VPN on reboot'
-    OnChange = AutoStartBoxChange
     TabOrder = 5
+    OnChange = AutoStartBoxChange
   end
   object StartBtn: TSpeedButton
     AnchorSideLeft.Control = Shape1

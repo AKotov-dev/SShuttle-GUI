@@ -1,15 +1,15 @@
 object MainForm: TMainForm
-  Left = 263
-  Height = 175
-  Top = 126
+  Left = 287
+  Height = 189
+  Top = 125
   Width = 531
   Caption = 'SShuttle-GUI'
-  ClientHeight = 175
+  ClientHeight = 189
   ClientWidth = 531
   OnCreate = FormCreate
   OnShow = FormShow
   SessionProperties = 'IPv6Box.Checked;LatencyBox.Checked;Left;PasswordEdit.Text;PortEdit.Text;RouterEdit.Text;ServerEdit.Text;Top;UserEdit.Text'
-  LCLVersion = '2.2.4.0'
+  LCLVersion = '3.2.0.0'
   object Label1: TLabel
     AnchorSideTop.Side = asrCenter
     Left = 8
@@ -87,13 +87,13 @@ object MainForm: TMainForm
     AnchorSideRight.Side = asrBottom
     Left = 283
     Height = 32
-    Top = 134
+    Top = 135
     Width = 242
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 6
     Caption = 'Clear browser cookies on start GUI'
-    OnChange = ClearBoxChange
     TabOrder = 7
+    OnChange = ClearBoxChange
   end
   object AutoStartBox: TCheckBox
     AnchorSideLeft.Control = StartBtn
@@ -107,8 +107,8 @@ object MainForm: TMainForm
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 6
     Caption = 'Autostart VPN on reboot'
-    OnChange = AutoStartBoxChange
     TabOrder = 5
+    OnChange = AutoStartBoxChange
   end
   object StartBtn: TSpeedButton
     AnchorSideLeft.Control = Shape1
@@ -134,7 +134,7 @@ object MainForm: TMainForm
   object StaticText1: TStaticText
     Left = 0
     Height = 20
-    Top = 155
+    Top = 169
     Width = 531
     Align = alBottom
     BorderStyle = sbsSingle
@@ -205,9 +205,9 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 32
-    Top = 134
+    Top = 135
     Width = 161
-    BorderSpacing.Top = 2
+    BorderSpacing.Top = 3
     Caption = '--no-latency-control'
     Checked = True
     State = cbChecked
