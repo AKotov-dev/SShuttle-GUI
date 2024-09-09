@@ -207,7 +207,7 @@ begin
       Trim(PortEdit.Text) + ' -x ' + Trim(ServerEDit.Text) + ':' +
       Trim(PortEdit.Text) + ' 0/0 ' + Trim(Pars));
 
-    S.Add('exit 0');
+    S.Add('exit 0;');
 
     S.SaveToFile('/etc/sshuttle-gui/connect.sh');
 

@@ -196,7 +196,7 @@ begin
     S.Add('killall sshpass; sshpass -p "' + Trim(PasswordEdit.Text) +
       '" ssh -o StrictHostKeyChecking=No ' + Trim(UserEdit.Text) +
       // '@' + Trim(ServerEDit.Text) + ' -p ' + Trim(PortEdit.Text) + ' exit 0; fi');
-      '@' + Trim(ServerEDit.Text) + ' -p ' + Trim(PortEdit.Text) + ' exit 0;');
+      '@' + Trim(ServerEDit.Text) + ' -p ' + Trim(PortEdit.Text) + ' exit 0');
 
     S.Add('');
 
