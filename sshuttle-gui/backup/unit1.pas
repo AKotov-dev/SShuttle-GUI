@@ -175,7 +175,7 @@ begin
   if StartBtn.Caption = SStop then
   begin
     Shape1.Brush.Color := clYellow;
-    StartProcess('systemctl stop sshuttle.service');
+    StartProcess('killall sshpass; systemctl stop sshuttle.service');
   end
   else
   try
@@ -196,7 +196,7 @@ begin
     S.Add('killall sshpass; sshpass -p "' + Trim(PasswordEdit.Text) +
       '" ssh -o StrictHostKeyChecking=No ' + Trim(UserEdit.Text) +
       // '@' + Trim(ServerEDit.Text) + ' -p ' + Trim(PortEdit.Text) + ' exit 0; fi');
-      '@' + Trim(ServerEDit.Text) + ' -p ' + Trim(PortEdit.Text));
+      '@' + Trim(ServerEDit.Text) + ' -p ' + Trim(PortEdit.Text) + ' exit 0;');
 
     S.Add('');
 
