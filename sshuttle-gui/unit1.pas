@@ -190,14 +190,13 @@ begin
     //Очистка прежних ключей (мог измениться пароль или хост)
     S.Add('sed -i "/^' + Trim(ServerEDit.Text) + '/d" /root/.ssh/known_hosts');
 
-   { S.Add('if [[ ! -f /root/.ssh/known_hosts.old ]] || [[ -z $(ssh-keygen -F ' +
-      Trim(ServerEDit.Text) + ') ]]; then'); }
+   { S.Add('if [[ -z $(ssh-keygen -F ' +  Trim(ServerEDit.Text) + ') ]]; then'); }
 
-    //Пересоздать ключи для хоста (пароль мог измениться)
-    S.Add('sshpass -p "' + Trim(PasswordEdit.Text) +
+    //Пересоздать ключи для хоста (пароль мог измениться) + отмена зависших sshpass
+    S.Add('killall sshpass; sshpass -p "' + Trim(PasswordEdit.Text) +
       '" ssh -o StrictHostKeyChecking=No ' + Trim(UserEdit.Text) +
       // '@' + Trim(ServerEDit.Text) + ' -p ' + Trim(PortEdit.Text) + ' exit 0; fi');
-      '@' + Trim(ServerEDit.Text) + ' -p ' + Trim(PortEdit.Text) + ' exit 0');
+      '@' + Trim(ServerEDit.Text) + ' -p ' + Trim(PortEdit.Text));
 
     S.Add('');
 
@@ -208,7 +207,7 @@ begin
       Trim(PortEdit.Text) + ' -x ' + Trim(ServerEDit.Text) + ':' +
       Trim(PortEdit.Text) + ' 0/0 ' + Trim(Pars));
 
-    S.Add('exit 0;');
+    S.Add('exit 0');
 
     S.SaveToFile('/etc/sshuttle-gui/connect.sh');
 
