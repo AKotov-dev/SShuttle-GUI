@@ -209,8 +209,6 @@ begin
 
     S.Add('exit 0');
 
-    showmessage('111');
-
     S.SaveToFile('/etc/sshuttle-gui/connect.sh');
 
     //Запускаем скрипт через systemd
