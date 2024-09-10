@@ -75,7 +75,7 @@ object MainForm: TMainForm
     Left = 51
     Height = 37
     Top = 49
-    Width = 221
+    Width = 213
     BorderSpacing.Left = 3
     BorderSpacing.Top = 6
     BorderSpacing.Right = 10
@@ -166,7 +166,7 @@ object MainForm: TMainForm
     AnchorSideTop.Control = ServerEdit
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = PortEdit
-    Left = 282
+    Left = 274
     Height = 17
     Top = 59
     Width = 29
@@ -180,10 +180,10 @@ object MainForm: TMainForm
     AnchorSideTop.Control = ServerEdit
     AnchorSideRight.Control = PasswordEdit
     AnchorSideRight.Side = asrBottom
-    Left = 314
+    Left = 306
     Height = 37
     Top = 49
-    Width = 93
+    Width = 101
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 3
     TabOrder = 3

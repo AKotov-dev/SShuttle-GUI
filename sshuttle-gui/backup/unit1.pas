@@ -44,6 +44,7 @@ type
 
 var
   MainForm: TMainForm;
+  FormLoaded: boolean;
 
 resourcestring
 
@@ -111,10 +112,6 @@ begin
   if not DirectoryExists('/etc/sshuttle-gui') then MkDir('/etc/sshuttle-gui');
 
   IniPropStorage1.IniFileName := '/etc/sshuttle-gui/settings.conf';
-
-  //Поток проверки пинга
-  FCheckPingThread := CheckPing.Create(False);
-  FCheckPingThread.Priority := tpNormal;
 end;
 
 //Флаг очистки кеша браузеров при старте GUI
@@ -122,6 +119,8 @@ procedure TMainForm.ClearBoxChange(Sender: TObject);
 var
   S: ansistring;
 begin
+  if not FormLoaded then Exit;
+
   if not ClearBox.Checked then
     RunCommand('/bin/bash', ['-c', 'rm -f /etc/sshuttle-gui/clear'], S)
   else
@@ -133,6 +132,8 @@ procedure TMainForm.AutoStartBoxChange(Sender: TObject);
 var
   S: ansistring;
 begin
+  if not FormLoaded then Exit;
+
   Screen.Cursor := crHourGlass;
   Application.ProcessMessages;
 
@@ -151,6 +152,12 @@ begin
 
   AutostartBox.Checked := CheckAutoStart;
   ClearBox.Checked := CheckClear;
+
+  //Поток проверки пинга
+  FCheckPingThread := CheckPing.Create(False);
+  FCheckPingThread.Priority := tpNormal;
+
+  FormLoaded := True;
 end;
 
 //Start VPN

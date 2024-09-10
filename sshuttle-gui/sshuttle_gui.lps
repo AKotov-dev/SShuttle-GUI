@@ -58,10 +58,9 @@
         <Filename Value="pingtrd.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PingTRD"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="15"/>
         <UsageCount Value="36"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="start_trd.pas"/>
@@ -71,38 +70,26 @@
         <UsageCount Value="35"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="7">
+    <JumpHistory HistoryIndex="4">
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Column="13"/>
+        <Caret Line="153" Column="3" TopLine="112"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="199" Column="65" TopLine="174"/>
+        <Caret Line="115" TopLine="104"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="183" Column="21" TopLine="156"/>
+        <Caret Line="158" Column="42" TopLine="147"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="173" Column="70" TopLine="172"/>
+        <Caret Line="157" Column="3" TopLine="142"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="199" Column="61" TopLine="181"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Column="13"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="3" Column="52"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="141" Column="62" TopLine="113"/>
+        <Caret Line="105" TopLine="104"/>
       </Position>
     </JumpHistory>
     <RunParams>
