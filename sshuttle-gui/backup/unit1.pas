@@ -117,6 +117,7 @@ begin
   FCheckPingThread.Priority := tpNormal;
 end;
 
+//Флаг очистки кеша браузеров при старте GUI
 procedure TMainForm.ClearBoxChange(Sender: TObject);
 var
   S: ansistring;
@@ -127,6 +128,7 @@ begin
     RunCommand('/bin/bash', ['-c', 'touch /etc/sshuttle-gui/clear'], S);
 end;
 
+//Автостарт SShuttle после загрузки
 procedure TMainForm.AutoStartBoxChange(Sender: TObject);
 var
   S: ansistring;
@@ -135,9 +137,9 @@ begin
   Application.ProcessMessages;
 
   if not AutoStartBox.Checked then
-    RunCommand('/bin/bash', ['-c', 'systemctl disable sshuttle.service'], S)
+    RunCommand('/bin/bash', ['-c', 'systemctl disable sshuttle'], S)
   else
-    RunCommand('/bin/bash', ['-c', 'systemctl enable sshuttle.service'], S);
+    RunCommand('/bin/bash', ['-c', 'systemctl enable sshuttle'], S);
   Screen.Cursor := crDefault;
 end;
 
@@ -167,10 +169,10 @@ begin
   if (UserEdit.Text = '') or (PasswordEdit.Text = '') or
     (ServerEdit.Text = '') or (PortEdit.Text = '') then Exit;
 
-  //Сохранение параметров
+  //Сохраняем параметры
   IniPropStorage1.Save;
 
-  //Дополнительные параметры
+  //Построение дополнительных параметров
   Pars := '';
   if IPv6Box.Checked then Pars := IPv6Box.Caption;
   if LatencyBox.Checked then Pars := Concat(Pars, ' ', LatencyBox.Caption);
@@ -180,7 +182,7 @@ begin
   if StartBtn.Caption = SStop then
   begin
     Shape1.Brush.Color := clYellow;
-    StartProcess('systemctl stop sshuttle.service; pidof sshpass && killall sshpass; iptables -t nat -F');
+    StartProcess('systemctl stop sshuttle; pidof sshpass && killall sshpass; iptables -t nat -F');
   end
   else
   try
@@ -202,6 +204,8 @@ begin
       Trim(UserEdit.Text) + '@' + Trim(ServerEDit.Text) + ' -p ' +
       Trim(PortEdit.Text) + ' exit 0'); }
 
+    //Забираем публичные ключи с сервера
+    S.Add('# Забираем публичные ключи с сервера');
     S.Add('pidof sshpass && killall sshpass; iptables -t nat -F');
     S.Add('ssh-keyscan -p ' + PortEdit.Text + ' ' + ServerEDit.Text +
       ' >> /root/.ssh/known_hosts');
@@ -216,6 +220,7 @@ begin
 
     S.Add('');
 
+    S.Add('# Принудительная очистка iptables nat');
     S.Add('iptables -t nat -F');
 
     S.Add('exit 0;');
@@ -223,7 +228,7 @@ begin
     S.SaveToFile('/etc/sshuttle-gui/connect.sh');
 
     //Запускаем скрипт через systemd
-    StartProcess('chmod +x /etc/sshuttle-gui/connect.sh; systemctl restart sshuttle.service');
+    StartProcess('chmod +x /etc/sshuttle-gui/connect.sh; systemctl restart sshuttle');
 
   finally
     S.Free;

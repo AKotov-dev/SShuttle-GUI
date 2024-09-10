@@ -1,10 +1,10 @@
 object MainForm: TMainForm
   Left = 287
-  Height = 192
+  Height = 189
   Top = 125
   Width = 531
   Caption = 'SShuttle-GUI'
-  ClientHeight = 192
+  ClientHeight = 189
   ClientWidth = 531
   OnCreate = FormCreate
   OnShow = FormShow
@@ -62,7 +62,7 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrCenter
     Left = 8
     Height = 17
-    Top = 58
+    Top = 59
     Width = 40
     Caption = 'Server:'
     ParentColor = False
@@ -74,10 +74,10 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     Left = 51
     Height = 37
-    Top = 48
+    Top = 49
     Width = 221
     BorderSpacing.Left = 3
-    BorderSpacing.Top = 5
+    BorderSpacing.Top = 6
     BorderSpacing.Right = 10
     TabOrder = 2
   end
@@ -87,7 +87,7 @@ object MainForm: TMainForm
     AnchorSideRight.Side = asrBottom
     Left = 283
     Height = 32
-    Top = 135
+    Top = 136
     Width = 242
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 6
@@ -102,7 +102,7 @@ object MainForm: TMainForm
     AnchorSideRight.Side = asrBottom
     Left = 343
     Height = 32
-    Top = 100
+    Top = 101
     Width = 182
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 6
@@ -119,7 +119,7 @@ object MainForm: TMainForm
     AnchorSideBottom.Control = PortEdit
     AnchorSideBottom.Side = asrBottom
     Left = 433
-    Height = 79
+    Height = 80
     Top = 6
     Width = 92
     Anchors = [akTop, akLeft, akRight, akBottom]
@@ -134,7 +134,7 @@ object MainForm: TMainForm
   object StaticText1: TStaticText
     Left = 0
     Height = 20
-    Top = 172
+    Top = 169
     Width = 531
     Align = alBottom
     BorderStyle = sbsSingle
@@ -153,7 +153,7 @@ object MainForm: TMainForm
     AnchorSideRight.Control = StartBtn
     Left = 416
     Height = 12
-    Top = 39
+    Top = 40
     Width = 12
     BorderSpacing.Left = 9
     BorderSpacing.Right = 5
@@ -168,7 +168,7 @@ object MainForm: TMainForm
     AnchorSideRight.Control = PortEdit
     Left = 282
     Height = 17
-    Top = 58
+    Top = 59
     Width = 29
     BorderSpacing.Right = 3
     Caption = 'Port:'
@@ -182,7 +182,7 @@ object MainForm: TMainForm
     AnchorSideRight.Side = asrBottom
     Left = 314
     Height = 37
-    Top = 48
+    Top = 49
     Width = 93
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 3
@@ -194,7 +194,7 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 32
-    Top = 100
+    Top = 101
     Width = 120
     BorderSpacing.Top = 15
     Caption = '--disable-ipv6'
@@ -205,12 +205,10 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 32
-    Top = 135
+    Top = 136
     Width = 161
     BorderSpacing.Top = 3
     Caption = '--no-latency-control'
-    Checked = True
-    State = cbChecked
     TabOrder = 6
   end
   object IniPropStorage1: TIniPropStorage
