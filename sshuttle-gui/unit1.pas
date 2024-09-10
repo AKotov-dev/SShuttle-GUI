@@ -106,7 +106,7 @@ var
 begin
   MainForm.Caption := Application.Title;
 
-  //Каталог ключей и Рабочая директория
+  //Каталог ключей и Рабочая директория (/root/.ssh/known_hosts создаётся автоматически)
   if not DirectoryExists('/root/.ssh') then MkDir('/root/.ssh');
   if not DirectoryExists('/etc/sshuttle-gui') then MkDir('/etc/sshuttle-gui');
 
@@ -143,8 +143,6 @@ end;
 
 procedure TMainForm.FormShow(Sender: TObject);
 begin
-  //IniPropStorage1.Restore;
-
   //Высота/Ширина формы (Auto)
   MainForm.Height := ClearBox.Top + ClearBox.Height + StaticText1.Height + 5;
   MainForm.Width := StartBtn.Left + StartBtn.Height + 25;
@@ -159,10 +157,17 @@ var
   Pars: string;
   S: TStringList;
 begin
-  //Проверка на пустоту
-  if (Trim(UserEdit.Text) = '') or (Trim(PasswordEdit.Text) = '') or
-    (Trim(ServerEdit.Text) = '') or (Trim(PortEdit.Text) = '') then Exit;
+  //Форматируем содержимое полей
+  UserEdit.Text := Trim(UserEdit.Text);
+  PasswordEdit.Text := Trim(PasswordEdit.Text);
+  ServerEdit.Text := Trim(ServerEdit.Text);
+  PortEdit.Text := Trim(PortEdit.Text);
 
+  //Проверка на пустоту
+  if (UserEdit.Text = '') or (PasswordEdit.Text = '') or
+    (ServerEdit.Text = '') or (PortEdit.Text = '') then Exit;
+
+  //Сохранение параметров
   IniPropStorage1.Save;
 
   //Дополнительные параметры
@@ -171,41 +176,43 @@ begin
   if LatencyBox.Checked then Pars := Concat(Pars, ' ', LatencyBox.Caption);
 
   //Старт/Стоп VPN (ip(6)tables -L -t nat) - используется таблица ip(6)tables
-  //Цепочки очищаются после останова: systemctl stop sshuttle
+  //Цепочки очищаются после останова: systemctl stop sshuttle + отмена зависших sshpass и очистка NAT
   if StartBtn.Caption = SStop then
   begin
     Shape1.Brush.Color := clYellow;
-    StartProcess('systemctl stop sshuttle.service');
+    StartProcess('systemctl stop sshuttle.service; pidof sshpass && killall sshpass; iptables -t nat -F');
   end
   else
   try
+    //Содаём пускач для systemd (Type=simple)
     S := TStringList.Create;
 
     S.Add('#!/bin/bash');
     S.Add('');
 
-    //Содаём пускач для systemd (Type=simple)
-    S.Add('# Пересоздание ключей в /root/.ssh/known_hosts (пароль мог изменяться)');
+    S.Add('# Пересоздать ключи в /root/.ssh/known_hosts (параметры подключения могли измениться)');
 
     //Очистка прежних ключей (мог измениться пароль или хост)
-    S.Add('sed -i "/^' + Trim(ServerEDit.Text) + '/d" /root/.ssh/known_hosts');
+    S.Add('sed -i "/^' + ServerEDit.Text + '/d" /root/.ssh/known_hosts');
+    S.Add('');
 
-   { S.Add('if [[ -z $(ssh-keygen -F ' +  Trim(ServerEDit.Text) + ') ]]; then'); }
+    //Пересоздать ключи для хоста (пароль мог измениться) + отмена зависших sshpass и очистка NAT
+   { S.Add('pidof sshpass && killall sshpass; iptables -t nat -F; sshpass -p "' +
+      Trim(PasswordEdit.Text) + '" ssh -o StrictHostKeyChecking=No ' +
+      Trim(UserEdit.Text) + '@' + Trim(ServerEDit.Text) + ' -p ' +
+      Trim(PortEdit.Text) + ' exit 0'); }
 
-    //Пересоздать ключи для хоста (пароль мог измениться) + отмена зависших sshpass
-    S.Add('killall sshpass; sshpass -p "' + Trim(PasswordEdit.Text) +
-      '" ssh -o StrictHostKeyChecking=No ' + Trim(UserEdit.Text) +
-      // '@' + Trim(ServerEDit.Text) + ' -p ' + Trim(PortEdit.Text) + ' exit 0; fi');
-      '@' + Trim(ServerEDit.Text) + ' -p ' + Trim(PortEdit.Text) + ' exit 0');
+    S.Add('pidof sshpass && killall sshpass; iptables -t nat -F');
+    S.Add('ssh-keyscan -p ' + PortEdit.Text + ' ' + ServerEDit.Text +
+      ' >> /root/.ssh/known_hosts');
 
     S.Add('');
 
     S.Add('# Запуск vpn');
     S.Add('[[ "$?" -eq "0" ]] && \');
-    S.Add('sshpass -p "' + Trim(PasswordEdit.Text) + '" sshuttle --dns --remote ' +
-      Trim(UserEdit.Text) + '@' + Trim(ServerEDit.Text) + ':' +
-      Trim(PortEdit.Text) + ' -x ' + Trim(ServerEDit.Text) + ':' +
-      Trim(PortEdit.Text) + ' 0/0 ' + Trim(Pars));
+    S.Add('sshpass -p "' + PasswordEdit.Text + '" sshuttle --dns --remote ' +
+      UserEdit.Text + '@' + ServerEDit.Text + ':' + PortEdit.Text +
+      ' -x ' + ServerEDit.Text + ':' + PortEdit.Text + ' 0/0 ' + Trim(Pars));
 
     S.Add('exit 0;');
 
@@ -218,6 +225,5 @@ begin
     S.Free;
   end;
 end;
-
 
 end.
