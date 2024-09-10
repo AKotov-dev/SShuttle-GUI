@@ -144,7 +144,7 @@ end;
 procedure TMainForm.FormShow(Sender: TObject);
 begin
   //Высота/Ширина формы (Auto)
-  MainForm.Height := ClearBox.Top + ClearBox.Height + StaticText1.Height + 7;
+  MainForm.Height := ClearBox.Top + ClearBox.Height + StaticText1.Height + 6;
   MainForm.Width := StartBtn.Left + StartBtn.Height + 25;
 
   AutostartBox.Checked := CheckAutoStart;

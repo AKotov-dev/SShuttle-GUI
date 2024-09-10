@@ -209,8 +209,6 @@ object MainForm: TMainForm
     Width = 161
     BorderSpacing.Top = 3
     Caption = '--no-latency-control'
-    Checked = True
-    State = cbChecked
     TabOrder = 6
   end
   object IniPropStorage1: TIniPropStorage

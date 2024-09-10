@@ -31,7 +31,7 @@ urlcopy=https://github.com/AKotov-dev/SShuttle-GUI
 license=GPLv3
 
 [DEPS]
-deps=sshuttle sshpass iptables gtk2 polkit fping systemd
+deps=sshuttle sshpass iptables fping systemd gtk2 polkit
 
 [META]
 meta=0
