@@ -214,6 +214,10 @@ begin
       UserEdit.Text + '@' + ServerEDit.Text + ':' + PortEdit.Text +
       ' -x ' + ServerEDit.Text + ':' + PortEdit.Text + ' 0/0 ' + Trim(Pars));
 
+    S.Add('');
+
+    S.Add('iptables -t nat -F');
+
     S.Add('exit 0;');
 
     S.SaveToFile('/etc/sshuttle-gui/connect.sh');

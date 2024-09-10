@@ -157,10 +157,17 @@ var
   Pars: string;
   S: TStringList;
 begin
-  //Проверка на пустоту
-  if (Trim(UserEdit.Text) = '') or (Trim(PasswordEdit.Text) = '') or
-    (Trim(ServerEdit.Text) = '') or (Trim(PortEdit.Text) = '') then Exit;
+  //Форматируем содержимое полей
+  UserEdit.Text := Trim(UserEdit.Text);
+  PasswordEdit.Text := Trim(PasswordEdit.Text);
+  ServerEdit.Text := Trim(ServerEdit.Text);
+  PortEdit.Text := Trim(PortEdit.Text);
 
+  //Проверка на пустоту
+  if (UserEdit.Text = '') or (PasswordEdit.Text = '') or
+    (ServerEdit.Text = '') or (PortEdit.Text = '') then Exit;
+
+  //Сохранение параметров
   IniPropStorage1.Save;
 
   //Дополнительные параметры
@@ -183,10 +190,10 @@ begin
     S.Add('#!/bin/bash');
     S.Add('');
 
-    S.Add('# Пересоздание ключей в /root/.ssh/known_hosts (пароль мог измениться)');
+    S.Add('# Пересоздать ключи в /root/.ssh/known_hosts (параметры подключения могли измениться)');
 
     //Очистка прежних ключей (мог измениться пароль или хост)
-    S.Add('sed -i "/^' + Trim(ServerEDit.Text) + '/d" /root/.ssh/known_hosts');
+    S.Add('sed -i "/^' + ServerEDit.Text + '/d" /root/.ssh/known_hosts');
     S.Add('');
 
     //Пересоздать ключи для хоста (пароль мог измениться) + отмена зависших sshpass и очистка NAT
@@ -196,17 +203,16 @@ begin
       Trim(PortEdit.Text) + ' exit 0'); }
 
     S.Add('pidof sshpass && killall sshpass; iptables -t nat -F');
-    S.Add('ssh-keyscan -p ' + Trim(PortEdit.Text) + ' ' +
-      Trim(ServerEDit.Text) + ' >> /root/.ssh/known_hosts');
+    S.Add('ssh-keyscan -p ' + PortEdit.Text + ' ' + ServerEDit.Text +
+      ' >> /root/.ssh/known_hosts');
 
     S.Add('');
 
     S.Add('# Запуск vpn');
     S.Add('[[ "$?" -eq "0" ]] && \');
-    S.Add('sshpass -p "' + Trim(PasswordEdit.Text) + '" sshuttle --dns --remote ' +
-      Trim(UserEdit.Text) + '@' + Trim(ServerEDit.Text) + ':' +
-      Trim(PortEdit.Text) + ' -x ' + Trim(ServerEDit.Text) + ':' +
-      Trim(PortEdit.Text) + ' 0/0 ' + Trim(Pars));
+    S.Add('sshpass -p "' + PasswordEdit.Text + '" sshuttle --dns --remote ' +
+      UserEdit.Text + '@' + ServerEDit.Text + ':' + PortEdit.Text +
+      ' -x ' + ServerEDit.Text + ':' + PortEdit.Text + ' 0/0 ' + Trim(Pars));
 
     S.Add('exit 0;');
 
@@ -219,6 +225,5 @@ begin
     S.Free;
   end;
 end;
-
 
 end.

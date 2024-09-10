@@ -39,7 +39,7 @@
         <Filename Value="sshuttle_gui.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="39"/>
+        <UsageCount Value="40"/>
       </Unit>
       <Unit>
         <Filename Value="unit1.pas"/>
@@ -49,9 +49,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="183"/>
-        <CursorPos X="8" Y="159"/>
-        <UsageCount Value="39"/>
+        <UsageCount Value="40"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -60,9 +58,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="PingTRD"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="54"/>
-        <CursorPos Y="76"/>
-        <UsageCount Value="35"/>
+        <CursorPos X="15"/>
+        <UsageCount Value="36"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
