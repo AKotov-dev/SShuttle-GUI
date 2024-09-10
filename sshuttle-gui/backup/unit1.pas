@@ -144,7 +144,7 @@ end;
 procedure TMainForm.FormShow(Sender: TObject);
 begin
   //Высота/Ширина формы (Auto)
-  MainForm.Height := ClearBox.Top + ClearBox.Height + StaticText1.Height + 5;
+  MainForm.Height := ClearBox.Top + ClearBox.Height + StaticText1.Height + 7;
   MainForm.Width := StartBtn.Left + StartBtn.Height + 25;
 
   AutostartBox.Checked := CheckAutoStart;
@@ -213,6 +213,10 @@ begin
     S.Add('sshpass -p "' + PasswordEdit.Text + '" sshuttle --dns --remote ' +
       UserEdit.Text + '@' + ServerEDit.Text + ':' + PortEdit.Text +
       ' -x ' + ServerEDit.Text + ':' + PortEdit.Text + ' 0/0 ' + Trim(Pars));
+
+    S.Add('');
+
+    S.Add('iptables -t nat -F');
 
     S.Add('exit 0;');
 
