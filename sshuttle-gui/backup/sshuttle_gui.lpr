@@ -3,21 +3,21 @@ program sshuttle_gui;
 {$mode objfpc}{$H+}
 
 uses
- {$IFDEF UNIX}
+  {$IFDEF UNIX}
   cthreads,
-    {$ENDIF} {$IFDEF HASAMIGA}
+  {$ENDIF}{$IFDEF HASAMIGA}
   athreads,
-    {$ENDIF}
+  {$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms,
   Unit1,
   PingTRD { you can add units after this };
 
-{$R *.res}
+  {$R *.res}
 
 begin
   RequireDerivedFormResource := True;
-  Application.Title:='SShuttle-GUI v0.3';
+  Application.Title:='SShuttle-GUI v0.4';
   Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);

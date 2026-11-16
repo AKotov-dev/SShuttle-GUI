@@ -13,9 +13,9 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
+    Image1: TImage;
     IPv6Box: TCheckBox;
     LatencyBox: TCheckBox;
-    ClearBox: TCheckBox;
     AutoStartBox: TCheckBox;
     PortEdit: TEdit;
     Label4: TLabel;
@@ -30,7 +30,6 @@ type
     StartBtn: TSpeedButton;
     StaticText1: TStaticText;
     procedure AutoStartBoxChange(Sender: TObject);
-    procedure ClearBoxChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure StartBtnClick(Sender: TObject);
@@ -78,15 +77,6 @@ begin
   end;
 end;
 
-//Проверка чекбокса ClearBox (очистка кеш/cookies)
-function CheckClear: boolean;
-begin
-  if FileExists('/etc/sshuttle-gui/clear') then
-    Result := True
-  else
-    Result := False;
-end;
-
 //Проверка чекбокса AutoStart
 function CheckAutoStart: boolean;
 var
@@ -103,27 +93,26 @@ begin
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
+var
+  bmp: TBitmap;
 begin
   MainForm.Caption := Application.Title;
+
+  //Устраняем баг иконки приложения
+  bmp := TBitmap.Create;
+  try
+    bmp.PixelFormat := pf32bit;
+    bmp.Assign(Image1.Picture.Graphic);
+    Application.Icon.Assign(bmp);
+  finally
+    bmp.Free;
+  end;
 
   //Каталог ключей и Рабочая директория (/root/.ssh/known_hosts создаётся автоматически)
   if not DirectoryExists('/root/.ssh') then MkDir('/root/.ssh');
   if not DirectoryExists('/etc/sshuttle-gui') then MkDir('/etc/sshuttle-gui');
 
   IniPropStorage1.IniFileName := '/etc/sshuttle-gui/settings.conf';
-end;
-
-//Флаг очистки кеша браузеров при старте GUI
-procedure TMainForm.ClearBoxChange(Sender: TObject);
-var
-  S: ansistring;
-begin
-  if not FormLoaded then Exit;
-
-  if not ClearBox.Checked then
-    RunCommand('/bin/bash', ['-c', 'rm -f /etc/sshuttle-gui/clear'], S)
-  else
-    RunCommand('/bin/bash', ['-c', 'touch /etc/sshuttle-gui/clear'], S);
 end;
 
 //Автостарт SShuttle после загрузки
@@ -148,11 +137,10 @@ var
   FCheckPingThread: TThread;
 begin
   //Высота/Ширина формы (Auto)
-  MainForm.Height := ClearBox.Top + ClearBox.Height + StaticText1.Height + 6;
+  MainForm.Height := LatencyBox.Top + LatencyBox.Height + StaticText1.Height + 6;
   MainForm.Width := StartBtn.Left + StartBtn.Height + 25;
 
   AutostartBox.Checked := CheckAutoStart;
-  ClearBox.Checked := CheckClear;
 
   //Поток проверки пинга
   FCheckPingThread := CheckPing.Create(False);
@@ -215,7 +203,7 @@ begin
 
     //Забираем публичные ключи с сервера
     S.Add('# Забираем публичные ключи с сервера');
-    S.Add('pidof sshpass && killall sshpass; iptables -t nat -F');
+    S.Add('pidof sshpass && killall sshpass; iptables -t nat -F; ip6tables -t nat -F');
     S.Add('ssh-keyscan -p ' + PortEdit.Text + ' ' + ServerEDit.Text +
       ' >> /root/.ssh/known_hosts');
 
@@ -230,9 +218,11 @@ begin
     S.Add('');
 
     S.Add('# Принудительная очистка iptables nat');
-    S.Add('iptables -t nat -F');
+    S.Add('iptables -t nat -F; ip6tables -t nat -F');
 
-    S.Add('exit 0;');
+    S.Add('');
+
+    S.Add('exit 0');
 
     S.SaveToFile('/etc/sshuttle-gui/connect.sh');
 

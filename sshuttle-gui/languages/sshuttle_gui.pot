@@ -9,10 +9,6 @@ msgstr ""
 msgid "SShuttle-GUI"
 msgstr ""
 
-#: tmainform.clearbox.caption
-msgid "Clear browser cookies on start GUI"
-msgstr ""
-
 #: tmainform.ipv6box.caption
 msgid "--disable-ipv6"
 msgstr ""
@@ -47,7 +43,7 @@ msgid "Start"
 msgstr ""
 
 #: tmainform.statictext1.caption
-msgid "License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru"
+msgid "License: GPLv3   Author: alex_q_2000 (C) 2026"
 msgstr ""
 
 #: tmainform.useredit.text

@@ -1,0 +1,87 @@
+[NAME]
+name=sshuttle-gui
+
+[VERSION]
+version=0.4
+
+[RELEASE]
+release=0.mrx10
+
+[GROUP]
+group=Networking/Other
+
+[DESCRIPTION]
+0=GUI for SShuttle - Transparent proxy server that works as a poor man's VPN. Forwards over ssh.
+1=---
+2=More information: /usr/share/doc/package_name/repack.txt
+
+[MAINTAINER]
+maintainer=Alex Kotov
+
+[VENDOR]
+vendor=alex_q_2000 (C) 2026
+
+[SUMMARY]
+summary=GUI for SShuttle
+
+[URLCOPY]
+urlcopy=https://github.com/AKotov-dev/SShuttle-GUI
+
+[LICENSE]
+license=GPL-3.0-or-later
+
+[DEPS]
+deps=sshuttle sshpass iptables fping systemd libgtk2.0-0
+
+[META]
+meta=0
+
+[NOARCH]
+noarch=0
+
+[DEB]
+deb=1
+
+[FILES]
+0=/usr/bin/sshuttle-gui
+1=/usr/share/icons/sshuttle-gui.png
+2=/etc/systemd/system/sshuttle.service
+3=/usr/share/applications/sshuttle-gui.desktop
+4=/usr/share/polkit-1/actions/sshuttle-gui.policy
+5=/usr/share/sshuttle-gui/
+6=/usr/share/doc/sshuttle-gui/
+
+[AFTERINSTALL]
+0=systemctl daemon-reload
+
+[AFTERREMOVE]
+0=systemctl daemon-reload
+
+[URL32]
+url32=https://github.com/AKotov-dev/SShuttle-GUI
+
+[PROGRAMNAME]
+programname=SShuttle-GUI
+
+[DEVTOOL]
+devtool=Lazarus
+
+[TOOLVERSION]
+toolversion=4.4
+
+[INFO]
+0=v0.4
+1=+ Build in Lazarus-4.4
+2=+ RPM/DEB packages for Mageia/Fedora/Ubuntu
+3=
+4=v0.3
+5=+ Recompiling in Lazarus 3.2
+6=+ Force iptables nat clear if sshuttle.service is stopped
+7=+ Re-creating SSH keys (when there are changes on the server)
+8=+ RPM-packages for Mageia-9 and Ubuntu
+9=
+10=v0.2
+11=+ Improved startup sshuttle.service
+12=+ RPM-packages for Mageia-8, ROSA Linux and Mageia-9
+13=
+14=v0.1 - initial release

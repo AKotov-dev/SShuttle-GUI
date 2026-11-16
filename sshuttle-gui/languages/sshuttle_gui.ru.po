@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.8\n"
 
 #: tmainform.autostartbox.caption
 msgid "Autostart VPN on reboot"
@@ -19,10 +19,6 @@ msgstr "Автостарт VPN после перезагрузки"
 #: tmainform.caption
 msgid "SShuttle-GUI"
 msgstr ""
-
-#: tmainform.clearbox.caption
-msgid "Clear browser cookies on start GUI"
-msgstr "Очистить cookies браузера при старте GUI"
 
 #: tmainform.ipv6box.caption
 msgid "--disable-ipv6"
@@ -58,8 +54,8 @@ msgid "Start"
 msgstr "Старт"
 
 #: tmainform.statictext1.caption
-msgid "License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru"
-msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2023   URL: https://linuxforum.ru"
+msgid "License: GPLv3   Author: alex_q_2000 (C) 2026"
+msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2026"
 
 #: tmainform.useredit.text
 msgid "root"
