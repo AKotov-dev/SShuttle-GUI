@@ -39,6 +39,8 @@ type
 
   public
 
+    SERVER_IP_PREV, SERVER_PORT_PREV: string;
+
   end;
 
 var
@@ -140,6 +142,10 @@ begin
   MainForm.Height := LatencyBox.Top + LatencyBox.Height + StaticText1.Height + 6;
   MainForm.Width := StartBtn.Left + StartBtn.Height + 25;
 
+  //Запоминаем предыдушие сервер:порт для очистки ~/.ssh/known_hosts
+  SERVER_IP_PREV := ServerEdit.Text;
+  SERVER_PORT_PREV := PortEdit.Text;
+
   AutostartBox.Checked := CheckAutoStart;
 
   //Поток проверки пинга
@@ -179,7 +185,7 @@ begin
   if StartBtn.Caption = SStop then
   begin
     Shape1.Brush.Color := clYellow;
-    StartProcess('systemctl stop sshuttle; pidof sshpass && killall sshpass; iptables -t nat -F');
+    StartProcess('systemctl stop sshuttle; pidof sshpass && killall sshpass; iptables -t nat -F; ip6tables -t nat -F');
   end
   else
   try
@@ -192,8 +198,21 @@ begin
     S.Add('# Пересоздать ключи в /root/.ssh/known_hosts (параметры подключения могли измениться)');
 
     //Очистка прежних ключей (мог измениться пароль или хост)
-    S.Add('sed -i "/^' + ServerEDit.Text + '/d" /root/.ssh/known_hosts');
-    S.Add('');
+  {  S.Add('sed -i "/^' + ServerEDit.Text + '/d" /root/.ssh/known_hosts');
+    S.Add(''); }
+
+    //Если это не первый запуск
+    if (SERVER_IP_PREV <> '') and (SERVER_PORT_PREV <> '') then
+    begin
+      //Очищаем старые ключи (переменные уже в памяти после загрузки формы)
+      if SERVER_PORT_PREV = '22' then
+        S.Add('ssh-keygen -R "' + SERVER_IP_PREV + '" 2>/dev/null')
+      else
+        S.Add('ssh-keygen -R "[' + SERVER_IP_PREV + ']:' + SERVER_PORT_PREV +
+          '" 2>/dev/null');
+
+      S.Add('');
+    end;
 
     //Пересоздать ключи для хоста (пароль мог измениться) + отмена зависших sshpass и очистка NAT
    { S.Add('pidof sshpass && killall sshpass; iptables -t nat -F; sshpass -p "' +
@@ -204,14 +223,14 @@ begin
     //Забираем публичные ключи с сервера
     S.Add('# Забираем публичные ключи с сервера');
     S.Add('pidof sshpass && killall sshpass; iptables -t nat -F; ip6tables -t nat -F');
-    S.Add('ssh-keyscan -p ' + PortEdit.Text + ' ' + ServerEDit.Text +
-      ' >> /root/.ssh/known_hosts');
+    S.Add('ssh-keyscan -q -p "' + PortEdit.Text + '" "' + ServerEDit.Text +
+      '" >> /root/.ssh/known_hosts');
 
     S.Add('');
 
     S.Add('# Запуск vpn');
     S.Add('[[ "$?" -eq "0" ]] && \');
-    S.Add('sshpass -p "' + PasswordEdit.Text + '" sshuttle --dns --remote ' +
+    S.Add('sshpass -p ''' + PasswordEdit.Text + ''' sshuttle --dns --remote ' +
       UserEdit.Text + '@' + ServerEDit.Text + ':' + PortEdit.Text +
       ' -x ' + ServerEDit.Text + ':' + PortEdit.Text + ' 0/0 ' + Trim(Pars));
 
@@ -226,8 +245,12 @@ begin
 
     S.SaveToFile('/etc/sshuttle-gui/connect.sh');
 
+    //Запоминаем новые данные переменных для последующей чистки
+    SERVER_IP_PREV := ServerEdit.Text;
+    SERVER_PORT_PREV := PortEdit.Text;
+
     //Запускаем скрипт через systemd
-    StartProcess('chmod +x /etc/sshuttle-gui/connect.sh; systemctl restart sshuttle');
+    StartProcess('chmod 700 /etc/sshuttle-gui/connect.sh; systemctl restart sshuttle');
 
   finally
     S.Free;
