@@ -25,19 +25,27 @@ msgid "--disable-ipv6"
 msgstr ""
 
 #: tmainform.label1.caption
-msgid "Login:"
+#, fuzzy
+#| msgid "Login:"
+msgid "Login"
 msgstr "Логин:"
 
 #: tmainform.label2.caption
-msgid "Password:"
+#, fuzzy
+#| msgid "Password:"
+msgid "Password"
 msgstr "Пароль:"
 
 #: tmainform.label3.caption
-msgid "Server:"
+#, fuzzy
+#| msgid "Server:"
+msgid "Server"
 msgstr "Сервер:"
 
 #: tmainform.label4.caption
-msgid "Port:"
+#, fuzzy
+#| msgid "Port:"
+msgid "Port"
 msgstr "Порт:"
 
 #: tmainform.latencybox.caption
@@ -69,3 +77,4 @@ msgstr "Старт"
 #: unit1.sstop
 msgid "Stop"
 msgstr "Стоп"
+

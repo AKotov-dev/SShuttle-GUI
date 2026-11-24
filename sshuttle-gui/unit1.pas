@@ -198,9 +198,6 @@ begin
     S.Add('# Пересоздать ключи в /root/.ssh/known_hosts (параметры подключения могли измениться)');
 
     //Очистка прежних ключей (мог измениться пароль или хост)
-  {  S.Add('sed -i "/^' + ServerEDit.Text + '/d" /root/.ssh/known_hosts');
-    S.Add(''); }
-
     //Если это не первый запуск
     if (SERVER_IP_PREV <> '') and (SERVER_PORT_PREV <> '') then
     begin
@@ -213,12 +210,6 @@ begin
 
       S.Add('');
     end;
-
-    //Пересоздать ключи для хоста (пароль мог измениться) + отмена зависших sshpass и очистка NAT
-   { S.Add('pidof sshpass && killall sshpass; iptables -t nat -F; sshpass -p "' +
-      Trim(PasswordEdit.Text) + '" ssh -o StrictHostKeyChecking=No ' +
-      Trim(UserEdit.Text) + '@' + Trim(ServerEDit.Text) + ' -p ' +
-      Trim(PortEdit.Text) + ' exit 0'); }
 
     //Забираем публичные ключи с сервера
     S.Add('# Забираем публичные ключи с сервера');

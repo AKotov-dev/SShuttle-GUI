@@ -14,19 +14,19 @@ msgid "--disable-ipv6"
 msgstr ""
 
 #: tmainform.label1.caption
-msgid "Login:"
+msgid "Login"
 msgstr ""
 
 #: tmainform.label2.caption
-msgid "Password:"
+msgid "Password"
 msgstr ""
 
 #: tmainform.label3.caption
-msgid "Server:"
+msgid "Server"
 msgstr ""
 
 #: tmainform.label4.caption
-msgid "Port:"
+msgid "Port"
 msgstr ""
 
 #: tmainform.latencybox.caption

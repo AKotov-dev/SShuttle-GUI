@@ -198,10 +198,7 @@ begin
     S.Add('# Пересоздать ключи в /root/.ssh/known_hosts (параметры подключения могли измениться)');
 
     //Очистка прежних ключей (мог измениться пароль или хост)
-  {  S.Add('sed -i "/^' + ServerEDit.Text + '/d" /root/.ssh/known_hosts');
-    S.Add(''); }
-
-        //Если это не первый запуск
+    //Если это не первый запуск
     if (SERVER_IP_PREV <> '') and (SERVER_PORT_PREV <> '') then
     begin
       //Очищаем старые ключи (переменные уже в памяти после загрузки формы)
@@ -244,6 +241,10 @@ begin
     S.Add('exit 0');
 
     S.SaveToFile('/etc/sshuttle-gui/connect.sh');
+
+    //Запоминаем новые данные переменных для последующей чистки
+    SERVER_IP_PREV := ServerEdit.Text;
+    SERVER_PORT_PREV := PortEdit.Text;
 
     //Запускаем скрипт через systemd
     StartProcess('chmod 700 /etc/sshuttle-gui/connect.sh; systemctl restart sshuttle');
