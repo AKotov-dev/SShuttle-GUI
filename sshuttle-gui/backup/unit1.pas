@@ -139,12 +139,8 @@ var
   FCheckPingThread: TThread;
 begin
   //Высота/Ширина формы (Auto)
- { MainForm.Height := LatencyBox.Top + LatencyBox.Height + StaticText1.Height + 6;
+  MainForm.Height := LatencyBox.Top + LatencyBox.Height + StaticText1.Height + 6;
   MainForm.Width := StartBtn.Left + StartBtn.Height + 25;
-  }
-
-  //Plasma DPI
-  IniPropStorage1.Restore;
 
   //Запоминаем предыдушие сервер:порт для очистки ~/.ssh/known_hosts
   SERVER_IP_PREV := ServerEdit.Text;
@@ -189,8 +185,7 @@ begin
   if StartBtn.Caption = SStop then
   begin
     Shape1.Brush.Color := clYellow;
-    StartProcess('systemctl stop sshuttle; pidof sshpass && killall sshpass');
-    //iptables -t nat -F; ip6tables -t nat -F
+    StartProcess('systemctl stop sshuttle; pidof sshpass && killall sshpass'); //iptables -t nat -F; ip6tables -t nat -F
   end
   else
   try
@@ -218,8 +213,7 @@ begin
 
     //Забираем публичные ключи с сервера
     S.Add('# Забираем публичные ключи с сервера');
-    S.Add('pidof sshpass && killall sshpass');
-    // ; iptables -t nat -F; ip6tables -t nat -F'
+    S.Add('pidof sshpass && killall sshpass'); // ; iptables -t nat -F; ip6tables -t nat -F'
     S.Add('ssh-keyscan -q -p "' + PortEdit.Text + '" "' + ServerEDit.Text +
       '" >> /root/.ssh/known_hosts');
 
@@ -247,7 +241,7 @@ begin
     SERVER_PORT_PREV := PortEdit.Text;
 
     //Запускаем скрипт через systemd
-    StartProcess('chmod 700 /etc/sshuttle-gui/connect.sh;  chmod 600 /etc/sshuttle-gui/settings.conf; systemctl restart sshuttle');
+    StartProcess('chmod 700 /etc/sshuttle-gui/connect.sh; chmod 600 /etc/sshuttle-gui/settings.conf; systemctl restart sshuttle');
 
   finally
     S.Free;
