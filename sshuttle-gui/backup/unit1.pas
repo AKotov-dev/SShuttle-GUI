@@ -187,7 +187,8 @@ begin
   if StartBtn.Caption = SStop then
   begin
     Shape1.Brush.Color := clYellow;
-    StartProcess('systemctl stop sshuttle; pidof sshpass && killall sshpass'); //iptables -t nat -F; ip6tables -t nat -F
+    StartProcess('systemctl stop sshuttle; pidof sshpass && killall sshpass');
+    //iptables -t nat -F; ip6tables -t nat -F
   end
   else
   try
@@ -215,7 +216,8 @@ begin
 
     //Забираем публичные ключи с сервера
     S.Add('# Забираем публичные ключи с сервера');
-    S.Add('pidof sshpass && killall sshpass'); // ; iptables -t nat -F; ip6tables -t nat -F'
+    S.Add('pidof sshpass && killall sshpass');
+    // ; iptables -t nat -F; ip6tables -t nat -F'
     S.Add('ssh-keyscan -q -p "' + PortEdit.Text + '" "' + ServerEDit.Text +
       '" >> /root/.ssh/known_hosts');
 

@@ -206,7 +206,7 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 32
-    Top = 146
+    Top = 145
     Width = 161
     Anchors = [akLeft]
     BorderSpacing.Top = 5
