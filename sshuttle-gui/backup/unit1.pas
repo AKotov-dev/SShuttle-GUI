@@ -139,8 +139,10 @@ var
   FCheckPingThread: TThread;
 begin
   //Высота/Ширина формы (Auto)
-  MainForm.Height := LatencyBox.Top + LatencyBox.Height + StaticText1.Height + 6;
+ { MainForm.Height := LatencyBox.Top + LatencyBox.Height + StaticText1.Height + 6;
   MainForm.Width := StartBtn.Left + StartBtn.Height + 25;
+  }
+
 
   //Запоминаем предыдушие сервер:порт для очистки ~/.ssh/known_hosts
   SERVER_IP_PREV := ServerEdit.Text;

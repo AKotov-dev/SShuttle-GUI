@@ -1,12 +1,12 @@
 object MainForm: TMainForm
   Left = 318
-  Height = 194
-  Top = 128
-  Width = 554
+  Height = 203
+  Top = 130
+  Width = 625
   Caption = 'SShuttle-GUI'
-  ClientHeight = 194
-  ClientWidth = 554
-  SessionProperties = 'IPv6Box.Checked;LatencyBox.Checked;Left;PasswordEdit.Text;PortEdit.Text;ServerEdit.Text;Top;UserEdit.Text'
+  ClientHeight = 203
+  ClientWidth = 625
+  SessionProperties = 'IPv6Box.Checked;LatencyBox.Checked;Left;Left;PasswordEdit.Text;PortEdit.Text;ServerEdit.Text;Top;UserEdit.Text;Width;Height'
   LCLVersion = '4.4.0.0'
   OnCreate = FormCreate
   OnShow = FormShow
@@ -40,10 +40,11 @@ object MainForm: TMainForm
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = UserEdit
     AnchorSideTop.Side = asrCenter
-    Left = 164
+    Left = 174
     Height = 17
     Top = 16
     Width = 58
+    Anchors = [akTop]
     BorderSpacing.Left = 20
     Caption = 'Password'
     ParentColor = False
@@ -53,46 +54,48 @@ object MainForm: TMainForm
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Label2
     AnchorSideTop.Side = asrCenter
-    Left = 226
+    Left = 236
     Height = 37
     Top = 6
-    Width = 198
+    Width = 230
     BorderSpacing.Left = 4
     TabOrder = 1
   end
   object Label3: TLabel
-    AnchorSideTop.Control = ServerEdit
     AnchorSideTop.Side = asrCenter
     Left = 8
     Height = 17
-    Top = 61
+    Top = 63
     Width = 37
+    Anchors = [akLeft]
     Caption = 'Server'
     ParentColor = False
   end
   object ServerEdit: TEdit
     AnchorSideLeft.Control = Label3
     AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = UserEdit
-    AnchorSideTop.Side = asrBottom
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrCenter
     Left = 49
     Height = 37
     Hint = 'IP or Domain'
-    Top = 51
-    Width = 213
+    Top = 53
+    Width = 247
     BorderSpacing.Left = 4
     BorderSpacing.Top = 8
-    BorderSpacing.Right = 10
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 2
   end
   object AutoStartBox: TCheckBox
     AnchorSideLeft.Control = StartBtn
     AnchorSideTop.Control = IPv6Box
+    AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 366
+    Left = 437
     Height = 32
-    Top = 103
+    Top = 108
     Width = 182
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 6
@@ -108,11 +111,11 @@ object MainForm: TMainForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = PortEdit
     AnchorSideBottom.Side = asrBottom
-    Left = 450
-    Height = 82
+    Left = 509
+    Height = 84
     Top = 6
-    Width = 98
-    Anchors = [akTop, akLeft, akRight, akBottom]
+    Width = 110
+    Anchors = [akTop, akRight, akBottom]
     BorderSpacing.Right = 6
     Caption = 'Start'
     Font.Height = -15
@@ -124,8 +127,8 @@ object MainForm: TMainForm
   object StaticText1: TStaticText
     Left = 0
     Height = 20
-    Top = 174
-    Width = 554
+    Top = 183
+    Width = 625
     Align = alBottom
     BorderStyle = sbsSingle
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2026'
@@ -141,10 +144,11 @@ object MainForm: TMainForm
     AnchorSideTop.Control = StartBtn
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = StartBtn
-    Left = 433
+    Left = 492
     Height = 12
-    Top = 41
+    Top = 42
     Width = 12
+    Anchors = [akTop, akRight]
     BorderSpacing.Left = 9
     BorderSpacing.Right = 5
     Brush.Color = clYellow
@@ -153,13 +157,14 @@ object MainForm: TMainForm
   object Label4: TLabel
     AnchorSideLeft.Control = ServerEdit
     AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = ServerEdit
+    AnchorSideTop.Control = Label3
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = PortEdit
-    Left = 282
+    Left = 329
     Height = 17
-    Top = 61
+    Top = 63
     Width = 26
+    Anchors = [akTop]
     BorderSpacing.Left = 20
     BorderSpacing.Right = 3
     Caption = 'Port'
@@ -168,14 +173,15 @@ object MainForm: TMainForm
   object PortEdit: TEdit
     AnchorSideLeft.Control = Label4
     AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = ServerEdit
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = PasswordEdit
     AnchorSideRight.Side = asrBottom
-    Left = 312
+    Left = 359
     Height = 37
     Hint = 'Default: 22'
-    Top = 51
-    Width = 112
+    Top = 53
+    Width = 107
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 4
     ParentShowHint = False
@@ -188,8 +194,9 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 32
-    Top = 103
+    Top = 108
     Width = 120
+    Anchors = [akLeft]
     BorderSpacing.Top = 15
     Caption = '--disable-ipv6'
     TabOrder = 4
@@ -199,16 +206,17 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 32
-    Top = 140
+    Top = 146
     Width = 161
+    Anchors = [akLeft]
     BorderSpacing.Top = 5
     Caption = '--no-latency-control'
     TabOrder = 6
   end
   object Image1: TImage
-    Left = 306
+    Left = 312
     Height = 96
-    Top = 136
+    Top = 128
     Width = 96
     AutoSize = True
     Picture.Data = {
