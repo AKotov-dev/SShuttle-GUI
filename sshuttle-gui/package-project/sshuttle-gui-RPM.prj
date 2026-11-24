@@ -2,7 +2,7 @@
 name=sshuttle-gui
 
 [VERSION]
-version=0.4
+version=0.5
 
 [RELEASE]
 release=0.mrx10
@@ -70,18 +70,22 @@ devtool=Lazarus
 toolversion=4.4
 
 [INFO]
-0=v0.4
-1=+ Build in Lazarus-4.4
+0=v0.5
+1=+ Improved cleanup of keys in ~/.ssh/known_hosts
 2=+ RPM/DEB packages for Mageia/Fedora/Ubuntu
 3=
-4=v0.3
-5=+ Recompiling in Lazarus 3.2
-6=+ Force iptables nat clear if sshuttle.service is stopped
-7=+ Re-creating SSH keys (when there are changes on the server)
-8=+ RPM-packages for Mageia-9 and Ubuntu
-9=
-10=v0.2
-11=+ Improved startup sshuttle.service
-12=+ RPM-packages for Mageia-8, ROSA Linux and Mageia-9
+4=v0.4
+5=+ Build in Lazarus-4.4
+6=+ RPM/DEB packages for Mageia/Fedora/Ubuntu
+7=
+8=v0.3
+9=+ Recompiling in Lazarus 3.2
+10=+ Force iptables nat clear if sshuttle.service is stopped
+11=+ Re-creating SSH keys (when there are changes on the server)
+12=+ RPM-packages for Mageia-9 and Ubuntu
 13=
-14=v0.1 - initial release
+14=v0.2
+15=+ Improved startup sshuttle.service
+16=+ RPM-packages for Mageia-8, ROSA Linux and Mageia-9
+17=
+18=v0.1 - initial release
