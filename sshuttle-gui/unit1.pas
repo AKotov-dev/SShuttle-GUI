@@ -185,7 +185,7 @@ begin
   if StartBtn.Caption = SStop then
   begin
     Shape1.Brush.Color := clYellow;
-    StartProcess('systemctl stop sshuttle; pidof sshpass && killall sshpass; iptables -t nat -F; ip6tables -t nat -F');
+    StartProcess('systemctl stop sshuttle; pidof sshpass && killall sshpass'); //iptables -t nat -F; ip6tables -t nat -F
   end
   else
   try
@@ -213,24 +213,24 @@ begin
 
     //Забираем публичные ключи с сервера
     S.Add('# Забираем публичные ключи с сервера');
-    S.Add('pidof sshpass && killall sshpass; iptables -t nat -F; ip6tables -t nat -F');
+    S.Add('pidof sshpass && killall sshpass'); // ; iptables -t nat -F; ip6tables -t nat -F'
     S.Add('ssh-keyscan -q -p "' + PortEdit.Text + '" "' + ServerEDit.Text +
       '" >> /root/.ssh/known_hosts');
 
     S.Add('');
 
-    S.Add('# Запуск vpn');
+    S.Add('# Запуск vpn; exec ');
     S.Add('[[ "$?" -eq "0" ]] && \');
-    S.Add('sshpass -p ''' + PasswordEdit.Text + ''' sshuttle --dns --remote ' +
+    S.Add('exec sshpass -p ''' + PasswordEdit.Text + ''' sshuttle --dns --remote ' +
       UserEdit.Text + '@' + ServerEDit.Text + ':' + PortEdit.Text +
       ' -x ' + ServerEDit.Text + ':' + PortEdit.Text + ' 0/0 ' + Trim(Pars));
 
     S.Add('');
 
-    S.Add('# Принудительная очистка iptables nat');
+  {  S.Add('# Принудительная очистка iptables nat');
     S.Add('iptables -t nat -F; ip6tables -t nat -F');
 
-    S.Add('');
+    S.Add('');}
 
     S.Add('exit 0');
 

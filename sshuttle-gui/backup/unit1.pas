@@ -211,32 +211,26 @@ begin
       S.Add('');
     end;
 
-    //Пересоздать ключи для хоста (пароль мог измениться) + отмена зависших sshpass и очистка NAT
-   { S.Add('pidof sshpass && killall sshpass; iptables -t nat -F; sshpass -p "' +
-      Trim(PasswordEdit.Text) + '" ssh -o StrictHostKeyChecking=No ' +
-      Trim(UserEdit.Text) + '@' + Trim(ServerEDit.Text) + ' -p ' +
-      Trim(PortEdit.Text) + ' exit 0'); }
-
     //Забираем публичные ключи с сервера
     S.Add('# Забираем публичные ключи с сервера');
-    S.Add('pidof sshpass && killall sshpass; iptables -t nat -F; ip6tables -t nat -F');
+    S.Add('pidof sshpass && killall sshpass'); // ; iptables -t nat -F; ip6tables -t nat -F'
     S.Add('ssh-keyscan -q -p "' + PortEdit.Text + '" "' + ServerEDit.Text +
       '" >> /root/.ssh/known_hosts');
 
     S.Add('');
 
-    S.Add('# Запуск vpn');
+    S.Add('# Запуск vpn; exec ');
     S.Add('[[ "$?" -eq "0" ]] && \');
-    S.Add('sshpass -p ''' + PasswordEdit.Text + ''' sshuttle --dns --remote ' +
+    S.Add('exec sshpass -p ''' + PasswordEdit.Text + ''' sshuttle --dns --remote ' +
       UserEdit.Text + '@' + ServerEDit.Text + ':' + PortEdit.Text +
       ' -x ' + ServerEDit.Text + ':' + PortEdit.Text + ' 0/0 ' + Trim(Pars));
 
     S.Add('');
 
-    S.Add('# Принудительная очистка iptables nat');
+  {  S.Add('# Принудительная очистка iptables nat');
     S.Add('iptables -t nat -F; ip6tables -t nat -F');
 
-    S.Add('');
+    S.Add('');}
 
     S.Add('exit 0');
 

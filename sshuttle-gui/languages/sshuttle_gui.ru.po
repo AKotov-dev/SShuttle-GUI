@@ -25,35 +25,35 @@ msgid "--disable-ipv6"
 msgstr ""
 
 #: tmainform.label1.caption
-#, fuzzy
-#| msgid "Login:"
 msgid "Login"
-msgstr "Логин:"
+msgstr "Логин"
 
 #: tmainform.label2.caption
-#, fuzzy
-#| msgid "Password:"
 msgid "Password"
-msgstr "Пароль:"
+msgstr "Пароль"
 
 #: tmainform.label3.caption
-#, fuzzy
-#| msgid "Server:"
 msgid "Server"
-msgstr "Сервер:"
+msgstr "Сервер"
 
 #: tmainform.label4.caption
-#, fuzzy
-#| msgid "Port:"
 msgid "Port"
-msgstr "Порт:"
+msgstr "Порт"
 
 #: tmainform.latencybox.caption
 msgid "--no-latency-control"
 msgstr ""
 
+#: tmainform.portedit.hint
+msgid "Default: 22"
+msgstr ""
+
 #: tmainform.portedit.text
 msgid "22"
+msgstr ""
+
+#: tmainform.serveredit.hint
+msgid "IP or Domain"
 msgstr ""
 
 #: tmainform.startbtn.caption
@@ -64,6 +64,10 @@ msgstr "Старт"
 #: tmainform.statictext1.caption
 msgid "License: GPLv3   Author: alex_q_2000 (C) 2026"
 msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2026"
+
+#: tmainform.useredit.hint
+msgid "Default: root"
+msgstr ""
 
 #: tmainform.useredit.text
 msgid "root"

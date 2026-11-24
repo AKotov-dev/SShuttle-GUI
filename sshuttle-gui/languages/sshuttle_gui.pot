@@ -33,8 +33,16 @@ msgstr ""
 msgid "--no-latency-control"
 msgstr ""
 
+#: tmainform.portedit.hint
+msgid "Default: 22"
+msgstr ""
+
 #: tmainform.portedit.text
 msgid "22"
+msgstr ""
+
+#: tmainform.serveredit.hint
+msgid "IP or Domain"
 msgstr ""
 
 #: tmainform.startbtn.caption
@@ -44,6 +52,10 @@ msgstr ""
 
 #: tmainform.statictext1.caption
 msgid "License: GPLv3   Author: alex_q_2000 (C) 2026"
+msgstr ""
+
+#: tmainform.useredit.hint
+msgid "Default: root"
 msgstr ""
 
 #: tmainform.useredit.text
