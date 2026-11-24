@@ -83,6 +83,8 @@ object MainForm: TMainForm
     BorderSpacing.Left = 4
     BorderSpacing.Top = 8
     BorderSpacing.Right = 10
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 2
   end
   object AutoStartBox: TCheckBox

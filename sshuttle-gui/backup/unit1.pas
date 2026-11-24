@@ -185,7 +185,7 @@ begin
   if StartBtn.Caption = SStop then
   begin
     Shape1.Brush.Color := clYellow;
-    StartProcess('systemctl stop sshuttle; pidof sshpass && killall sshpass; iptables -t nat -F; ip6tables -t nat -F');
+    StartProcess('systemctl stop sshuttle; pidof sshpass && killall sshpass'); //iptables -t nat -F; ip6tables -t nat -F
   end
   else
   try

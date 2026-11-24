@@ -54,7 +54,7 @@ msgstr ""
 
 #: tmainform.serveredit.hint
 msgid "IP or Domain"
-msgstr ""
+msgstr "IP или Домен"
 
 #: tmainform.startbtn.caption
 msgctxt "tmainform.startbtn.caption"
@@ -81,4 +81,3 @@ msgstr "Старт"
 #: unit1.sstop
 msgid "Stop"
 msgstr "Стоп"
-
