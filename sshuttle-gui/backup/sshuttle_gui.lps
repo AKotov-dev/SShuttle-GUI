@@ -38,9 +38,11 @@
       <Unit>
         <Filename Value="sshuttle_gui.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
         <CursorPos X="25"/>
         <UsageCount Value="42"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="unit1.pas"/>
@@ -49,7 +51,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-        <IsVisibleTab Value="True"/>
         <CursorPos X="13"/>
         <UsageCount Value="42"/>
         <Loaded Value="True"/>
@@ -59,9 +60,10 @@
         <Filename Value="pingtrd.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PingTRD"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="1"/>
         <CursorPos X="15"/>
         <UsageCount Value="38"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="start_trd.pas"/>
@@ -71,7 +73,7 @@
         <UsageCount Value="35"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="16">
+    <JumpHistory HistoryIndex="17">
       <Position>
         <Filename Value="unit1.pas"/>
         <Caret Line="153" Column="3" TopLine="112"/>
@@ -139,6 +141,10 @@
       <Position>
         <Filename Value="unit1.pas"/>
         <Caret Line="101" Column="3" TopLine="97"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Column="13"/>
       </Position>
     </JumpHistory>
     <RunParams>

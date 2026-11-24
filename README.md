@@ -3,7 +3,7 @@ GUI for [SShuttle](https://github.com/sshuttle/sshuttle) - Transparent proxy ser
 
 **Dependencies:** sshuttle sshpass gtk2 polkit fping systemd iptables  
   
-![](https://github.com/AKotov-dev/SShuttle-GUI/blob/main/Screenshot3.png)  
+![](https://github.com/AKotov-dev/SShuttle-GUI/blob/main/Screenshot1.png)  
   
 Perhaps the easiest-to-use tool for encrypting the connection and the corresponding bonuses. The closest analogue of `WARP` or something similar. Just rent your `VPS`, enter the received `Login`, `Password`, VPS IP and `Port` (22 by default) for SSH access and click the `Start` button.  
   

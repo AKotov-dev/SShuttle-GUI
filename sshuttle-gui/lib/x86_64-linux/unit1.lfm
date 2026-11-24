@@ -1,11 +1,11 @@
 object MainForm: TMainForm
   Left = 318
-  Height = 202
+  Height = 195
   Top = 130
-  Width = 625
+  Width = 616
   Caption = 'SShuttle-GUI'
-  ClientHeight = 202
-  ClientWidth = 625
+  ClientHeight = 195
+  ClientWidth = 616
   SessionProperties = 'IPv6Box.Checked;LatencyBox.Checked;Left;Left;PasswordEdit.Text;PortEdit.Text;ServerEdit.Text;Top;UserEdit.Text;Width;Height'
   LCLVersion = '4.4.0.0'
   OnCreate = FormCreate
@@ -40,7 +40,7 @@ object MainForm: TMainForm
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = UserEdit
     AnchorSideTop.Side = asrCenter
-    Left = 174
+    Left = 171
     Height = 17
     Top = 16
     Width = 58
@@ -54,7 +54,7 @@ object MainForm: TMainForm
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Label2
     AnchorSideTop.Side = asrCenter
-    Left = 236
+    Left = 233
     Height = 37
     Top = 6
     Width = 230
@@ -65,7 +65,7 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrCenter
     Left = 8
     Height = 17
-    Top = 63
+    Top = 61
     Width = 37
     Anchors = [akLeft]
     Caption = 'Server'
@@ -79,7 +79,7 @@ object MainForm: TMainForm
     Left = 49
     Height = 37
     Hint = 'IP or Domain'
-    Top = 53
+    Top = 51
     Width = 247
     BorderSpacing.Left = 4
     BorderSpacing.Top = 8
@@ -93,9 +93,9 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 437
+    Left = 428
     Height = 32
-    Top = 105
+    Top = 101
     Width = 182
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 6
@@ -111,8 +111,8 @@ object MainForm: TMainForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = PortEdit
     AnchorSideBottom.Side = asrBottom
-    Left = 509
-    Height = 84
+    Left = 500
+    Height = 82
     Top = 6
     Width = 110
     Anchors = [akTop, akRight, akBottom]
@@ -127,8 +127,8 @@ object MainForm: TMainForm
   object StaticText1: TStaticText
     Left = 0
     Height = 20
-    Top = 182
-    Width = 625
+    Top = 175
+    Width = 616
     Align = alBottom
     BorderStyle = sbsSingle
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2026'
@@ -144,9 +144,9 @@ object MainForm: TMainForm
     AnchorSideTop.Control = StartBtn
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = StartBtn
-    Left = 492
+    Left = 483
     Height = 12
-    Top = 42
+    Top = 41
     Width = 12
     Anchors = [akTop, akRight]
     BorderSpacing.Left = 9
@@ -160,9 +160,9 @@ object MainForm: TMainForm
     AnchorSideTop.Control = Label3
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = PortEdit
-    Left = 329
+    Left = 324
     Height = 17
-    Top = 63
+    Top = 61
     Width = 26
     Anchors = [akTop]
     BorderSpacing.Left = 20
@@ -177,11 +177,11 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = PasswordEdit
     AnchorSideRight.Side = asrBottom
-    Left = 359
+    Left = 354
     Height = 37
     Hint = 'Default: 22'
-    Top = 53
-    Width = 107
+    Top = 51
+    Width = 109
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 4
     ParentShowHint = False
@@ -194,7 +194,7 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 32
-    Top = 105
+    Top = 101
     Width = 120
     Anchors = [akLeft]
     BorderSpacing.Top = 15
@@ -202,13 +202,12 @@ object MainForm: TMainForm
     TabOrder = 4
   end
   object LatencyBox: TCheckBox
-    AnchorSideTop.Control = IPv6Box
     AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 32
-    Top = 142
+    Top = 135
     Width = 161
-    Anchors = [akLeft]
+    Anchors = [akLeft, akBottom]
     BorderSpacing.Top = 5
     Caption = '--no-latency-control'
     TabOrder = 6

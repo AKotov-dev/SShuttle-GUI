@@ -247,7 +247,8 @@ begin
     SERVER_PORT_PREV := PortEdit.Text;
 
     //Запускаем скрипт через systemd
-    StartProcess('chmod 700 /etc/sshuttle-gui/connect.sh; systemctl restart sshuttle');
+    StartProcess(
+      'chmod 700 /etc/sshuttle-gui/connect.sh;  chmod 600 /etc/sshuttle-gui/settings.conf; systemctl restart sshuttle');
 
   finally
     S.Free;
