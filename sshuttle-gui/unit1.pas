@@ -143,6 +143,8 @@ begin
   MainForm.Width := StartBtn.Left + StartBtn.Height + 25;
   }
 
+  //Plasma DPI
+  IniPropStorage1.Restore;
 
   //Запоминаем предыдушие сервер:порт для очистки ~/.ssh/known_hosts
   SERVER_IP_PREV := ServerEdit.Text;

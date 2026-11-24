@@ -1,10 +1,10 @@
 object MainForm: TMainForm
   Left = 318
-  Height = 203
+  Height = 202
   Top = 130
   Width = 625
   Caption = 'SShuttle-GUI'
-  ClientHeight = 203
+  ClientHeight = 202
   ClientWidth = 625
   SessionProperties = 'IPv6Box.Checked;LatencyBox.Checked;Left;Left;PasswordEdit.Text;PortEdit.Text;ServerEdit.Text;Top;UserEdit.Text;Width;Height'
   LCLVersion = '4.4.0.0'
@@ -95,7 +95,7 @@ object MainForm: TMainForm
     AnchorSideRight.Side = asrBottom
     Left = 437
     Height = 32
-    Top = 108
+    Top = 105
     Width = 182
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 6
@@ -127,7 +127,7 @@ object MainForm: TMainForm
   object StaticText1: TStaticText
     Left = 0
     Height = 20
-    Top = 183
+    Top = 182
     Width = 625
     Align = alBottom
     BorderStyle = sbsSingle
@@ -194,7 +194,7 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 32
-    Top = 108
+    Top = 105
     Width = 120
     Anchors = [akLeft]
     BorderSpacing.Top = 15
@@ -206,7 +206,7 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 32
-    Top = 146
+    Top = 142
     Width = 161
     Anchors = [akLeft]
     BorderSpacing.Top = 5
