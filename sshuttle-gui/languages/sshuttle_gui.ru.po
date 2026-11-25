@@ -46,7 +46,7 @@ msgstr ""
 
 #: tmainform.portedit.hint
 msgid "Default: 22"
-msgstr ""
+msgstr "По умолчанию:  22"
 
 #: tmainform.portedit.text
 msgid "22"
@@ -67,7 +67,7 @@ msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2026"
 
 #: tmainform.useredit.hint
 msgid "Default: root"
-msgstr ""
+msgstr "По умолчанию:  root"
 
 #: tmainform.useredit.text
 msgid "root"
