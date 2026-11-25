@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Buttons,
-  ComCtrls, ExtCtrls, IniPropStorage, Process, DefaultTranslator;
+  ComCtrls, ExtCtrls, Process, DefaultTranslator, IniFiles;
 
 type
 
@@ -22,7 +22,6 @@ type
     UserEdit: TEdit;
     PasswordEdit: TEdit;
     ServerEdit: TEdit;
-    IniPropStorage1: TIniPropStorage;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -30,16 +29,20 @@ type
     StartBtn: TSpeedButton;
     StaticText1: TStaticText;
     procedure AutoStartBoxChange(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure StartBtnClick(Sender: TObject);
     procedure StartProcess(command: string);
+    procedure SaveSettings;
+    procedure LoadSettings;
+    procedure SaveConnection;
 
   private
 
   public
 
-    SERVER_IP_PREV, SERVER_PORT_PREV: string;
+    SERVER_IP_PREV, SERVER_PORT_PREV, CONF: string;
 
   end;
 
@@ -60,6 +63,84 @@ uses pingtrd;
   {$R *.lfm}
 
   { TMainForm }
+
+
+//Сохранение настроек формы
+procedure TMainForm.SaveSettings;
+var
+  Ini: TIniFile;
+begin
+  Ini := TIniFile.Create(CONF);
+  try
+    Ini.WriteInteger('TApplication.MainForm', 'MainForm_Top', MainForm.Top);
+    Ini.WriteInteger('TApplication.MainForm', 'MainForm_Left', MainForm.Left);
+    Ini.WriteInteger('TApplication.MainForm', 'MainForm_Width', MainForm.Width);
+    Ini.WriteInteger('TApplication.MainForm', 'MainForm_Height', MainForm.Height);
+  finally
+    Ini.Free;
+  end;
+end;
+
+//Загрузка настроек формы
+procedure TMainForm.LoadSettings;
+var
+  Ini: TIniFile;
+begin
+  //  if not FileExists(CONF) then Exit;
+  Ini := TIniFile.Create(CONF);
+  try
+    MainForm.Top := Ini.ReadInteger('TApplication.MainForm', 'MainForm_Top',
+      MainForm.Top);
+    MainForm.Left := Ini.ReadInteger('TApplication.MainForm',
+      'MainForm_Left', MainForm.Left);
+    MainForm.Width := Ini.ReadInteger('TApplication.MainForm',
+      'MainForm_Width', MainForm.Width);
+    MainForm.Height := Ini.ReadInteger('TApplication.MainForm',
+      'MainForm_Height', MainForm.Height);
+
+    //Данные соединения
+    UserEdit.Text := Ini.ReadString('TApplication.MainForm', 'UserEdit_Text',
+      UserEdit.Text);
+    PasswordEdit.Text := Ini.ReadString('TApplication.MainForm',
+      'PasswordEdit_text', PasswordEdit.Text);
+    ServerEdit.Text := Ini.ReadString('TApplication.MainForm',
+      'ServerEdit_Text', ServerEdit.Text);
+    PortEdit.Text := Ini.ReadString('TApplication.MainForm', 'PortEdit_Text',
+      PortEdit.Text);
+
+    IPv6Box.Checked := Ini.ReadBool('TApplication.MainForm',
+      'IPv6Box_Checked', IPv6Box.Checked);
+    LatencyBox.Checked := Ini.ReadBool('TApplication.MainForm',
+      'LatencyBox_Checked', LatencyBox.Checked);
+
+  finally
+    Ini.Free;
+  end;
+end;
+
+//Сохранение данных соединения только по нажатию Start
+procedure TMainForm.SaveConnection;
+var
+  Ini: TIniFile;
+begin
+  Ini := TIniFile.Create(CONF);
+  try
+    // Ini.WriteString('Connection', 'Edit1', Edit1.Text);
+
+    //Данные соединения
+    Ini.WriteString('TApplication.MainForm', 'UserEdit_Text', UserEdit.Text);
+    Ini.WriteString('TApplication.MainForm', 'PasswordEdit_text', PasswordEdit.Text);
+
+    Ini.WriteString('TApplication.MainForm', 'ServerEdit_Text', ServerEdit.Text);
+    Ini.WriteString('TApplication.MainForm', 'PortEdit_Text', PortEdit.Text);
+
+    Ini.WriteBool('TApplication.MainForm', 'IPv6Box_Checked', IPv6Box.Checked);
+    Ini.WriteBool('TApplication.MainForm', 'LatencyBox_Checked', LatencyBox.Checked);
+
+  finally
+    Ini.Free;
+  end;
+end;
 
 //Общая процедура запуска команд (асинхронная)
 procedure TMainForm.StartProcess(command: string);
@@ -114,7 +195,8 @@ begin
   if not DirectoryExists('/root/.ssh') then MkDir('/root/.ssh');
   if not DirectoryExists('/etc/sshuttle-gui') then MkDir('/etc/sshuttle-gui');
 
-  IniPropStorage1.IniFileName := '/etc/sshuttle-gui/settings.conf';
+  CONF := '/etc/sshuttle-gui/settings.conf';
+
 end;
 
 //Автостарт SShuttle после загрузки
@@ -134,13 +216,21 @@ begin
   Screen.Cursor := crDefault;
 end;
 
+procedure TMainForm.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+begin
+  SaveSettings;
+end;
+
 procedure TMainForm.FormShow(Sender: TObject);
 var
   FCheckPingThread: TThread;
 begin
   //Высота/Ширина формы (Auto)
-  MainForm.Height := LatencyBox.Top + LatencyBox.Height + StaticText1.Height + 6;
+ { MainForm.Height := LatencyBox.Top + LatencyBox.Height + StaticText1.Height + 6;
   MainForm.Width := StartBtn.Left + StartBtn.Height + 25;
+  }
+
+  LoadSettings;
 
   //Запоминаем предыдушие сервер:порт для очистки ~/.ssh/known_hosts
   SERVER_IP_PREV := ServerEdit.Text;
@@ -173,7 +263,9 @@ begin
     (ServerEdit.Text = '') or (PortEdit.Text = '') then Exit;
 
   //Сохраняем параметры
-  IniPropStorage1.Save;
+  // IniPropStorage1.Save;
+
+  SaveConnection;
 
   //Построение дополнительных параметров
   Pars := '';
@@ -185,7 +277,8 @@ begin
   if StartBtn.Caption = SStop then
   begin
     Shape1.Brush.Color := clYellow;
-    StartProcess('systemctl stop sshuttle; pidof sshpass && killall sshpass'); //iptables -t nat -F; ip6tables -t nat -F
+    StartProcess('systemctl stop sshuttle; pidof sshpass && killall sshpass');
+    //iptables -t nat -F; ip6tables -t nat -F
   end
   else
   try
@@ -213,7 +306,8 @@ begin
 
     //Забираем публичные ключи с сервера
     S.Add('# Забираем публичные ключи с сервера');
-    S.Add('pidof sshpass && killall sshpass'); // ; iptables -t nat -F; ip6tables -t nat -F'
+    S.Add('pidof sshpass && killall sshpass');
+    // ; iptables -t nat -F; ip6tables -t nat -F'
     S.Add('ssh-keyscan -q -p "' + PortEdit.Text + '" "' + ServerEDit.Text +
       '" >> /root/.ssh/known_hosts');
 
@@ -241,7 +335,8 @@ begin
     SERVER_PORT_PREV := PortEdit.Text;
 
     //Запускаем скрипт через systemd
-    StartProcess('chmod 700 /etc/sshuttle-gui/connect.sh; chmod 600 /etc/sshuttle-gui/settings.conf; systemctl restart sshuttle');
+    StartProcess(
+      'chmod 700 /etc/sshuttle-gui/connect.sh; chmod 600 /etc/sshuttle-gui/settings.conf; systemctl restart sshuttle');
 
   finally
     S.Free;
