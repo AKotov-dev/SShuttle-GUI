@@ -29,7 +29,7 @@ type
     StartBtn: TSpeedButton;
     StaticText1: TStaticText;
     procedure AutoStartBoxChange(Sender: TObject);
-    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure StartBtnClick(Sender: TObject);
@@ -125,8 +125,6 @@ var
 begin
   Ini := TIniFile.Create(CONF);
   try
-    // Ini.WriteString('Connection', 'Edit1', Edit1.Text);
-
     //Данные соединения
     Ini.WriteString('TApplication.MainForm', 'UserEdit_Text', UserEdit.Text);
     Ini.WriteString('TApplication.MainForm', 'PasswordEdit_text', PasswordEdit.Text);
@@ -195,6 +193,7 @@ begin
   if not DirectoryExists('/root/.ssh') then MkDir('/root/.ssh');
   if not DirectoryExists('/etc/sshuttle-gui') then MkDir('/etc/sshuttle-gui');
 
+  //Фвйл конфигурации
   CONF := '/etc/sshuttle-gui/settings.conf';
 
 end;
@@ -216,7 +215,8 @@ begin
   Screen.Cursor := crDefault;
 end;
 
-procedure TMainForm.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+//Закрытие / Сохранение размеров формы, остальное по нажатию Start
+procedure TMainForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   SaveSettings;
 end;
@@ -225,11 +225,7 @@ procedure TMainForm.FormShow(Sender: TObject);
 var
   FCheckPingThread: TThread;
 begin
-  //Высота/Ширина формы (Auto)
- { MainForm.Height := LatencyBox.Top + LatencyBox.Height + StaticText1.Height + 6;
-  MainForm.Width := StartBtn.Left + StartBtn.Height + 25;
-  }
-
+  //Загрузка всех настроек (форма + подключение)
   LoadSettings;
 
   //Запоминаем предыдушие сервер:порт для очистки ~/.ssh/known_hosts
@@ -262,9 +258,7 @@ begin
   if (UserEdit.Text = '') or (PasswordEdit.Text = '') or
     (ServerEdit.Text = '') or (PortEdit.Text = '') then Exit;
 
-  //Сохраняем параметры
-  // IniPropStorage1.Save;
-
+  //Сохраняем параметры подключения
   SaveConnection;
 
   //Построение дополнительных параметров

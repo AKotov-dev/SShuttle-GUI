@@ -7,7 +7,7 @@ object MainForm: TMainForm
   ClientHeight = 198
   ClientWidth = 628
   LCLVersion = '4.4.0.0'
-  OnCloseQuery = FormCloseQuery
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   object Label1: TLabel

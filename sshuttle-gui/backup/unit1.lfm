@@ -7,7 +7,7 @@ object MainForm: TMainForm
   ClientHeight = 198
   ClientWidth = 628
   LCLVersion = '4.4.0.0'
-  OnCloseQuery = FormCloseQuery
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   object Label1: TLabel
@@ -94,7 +94,7 @@ object MainForm: TMainForm
     AnchorSideRight.Side = asrBottom
     Left = 438
     Height = 32
-    Top = 105
+    Top = 103
     Width = 182
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 8
@@ -189,7 +189,7 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 32
-    Top = 105
+    Top = 103
     Width = 120
     Anchors = [akLeft]
     BorderSpacing.Top = 15
@@ -201,11 +201,11 @@ object MainForm: TMainForm
     AnchorSideBottom.Control = StaticText1
     Left = 8
     Height = 32
-    Top = 141
+    Top = 138
     Width = 161
     Anchors = [akLeft, akBottom]
     BorderSpacing.Top = 5
-    BorderSpacing.Bottom = 5
+    BorderSpacing.Bottom = 8
     Caption = '--no-latency-control'
     TabOrder = 6
   end

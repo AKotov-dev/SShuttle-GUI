@@ -29,7 +29,7 @@ type
     StartBtn: TSpeedButton;
     StaticText1: TStaticText;
     procedure AutoStartBoxChange(Sender: TObject);
-    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure StartBtnClick(Sender: TObject);
@@ -125,8 +125,6 @@ var
 begin
   Ini := TIniFile.Create(CONF);
   try
-    // Ini.WriteString('Connection', 'Edit1', Edit1.Text);
-
     //Данные соединения
     Ini.WriteString('TApplication.MainForm', 'UserEdit_Text', UserEdit.Text);
     Ini.WriteString('TApplication.MainForm', 'PasswordEdit_text', PasswordEdit.Text);
@@ -195,6 +193,7 @@ begin
   if not DirectoryExists('/root/.ssh') then MkDir('/root/.ssh');
   if not DirectoryExists('/etc/sshuttle-gui') then MkDir('/etc/sshuttle-gui');
 
+  //Фвйл конфигурации
   CONF := '/etc/sshuttle-gui/settings.conf';
 
 end;
@@ -216,7 +215,7 @@ begin
   Screen.Cursor := crDefault;
 end;
 
-procedure TMainForm.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+procedure TMainForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   SaveSettings;
 end;
